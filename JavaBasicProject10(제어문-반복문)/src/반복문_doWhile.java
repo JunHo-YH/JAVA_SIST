@@ -12,11 +12,14 @@
 public class 반복문_doWhile {
 
 	public static void main(String[] args) {
+		// 1.초기값
 		int i = 1;
 		do {
+			// 2. 반복으로 수행되는 문장
 			System.out.println("i = " + i);
 			i++;
-		}while(i <= 5);
+		} while (i <= 10);
+
 	}
 
 }
