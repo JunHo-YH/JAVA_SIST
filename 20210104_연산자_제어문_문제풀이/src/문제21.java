@@ -8,7 +8,7 @@ public class ¹®Á¦21 {
 		
 		for (int i = 1; i <= 6; i++) {
 			for(int k = 1; k <= 6; k++) {
-				if(i + k == 6) {
+				if(i + k >= 10) {
 					System.out.println("[" + i + "," + k + "]");
 					count++;
 				}
