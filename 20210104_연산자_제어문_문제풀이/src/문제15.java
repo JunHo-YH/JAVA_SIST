@@ -9,7 +9,7 @@ public class 문제15 {
 			System.out.print("두 자리 정수를 입력하세요(10 ~ 99): ");
 			input = scan.nextInt();
 			//input < 10 || input > 99
-			if (!(10 <= input && input >= 99)) {
+			if (!(10 <= input && input <= 99)) {
 				System.out.println("잘못된 입력입니다.");
 				continue; // while문 조건식으로 이동
 			}
@@ -20,11 +20,15 @@ public class 문제15 {
 		int tens  = input / 10;
 		int units = input % 10;
 		
+		System.out.println(tens == units ? "YES!!" : "NO!!");
+		
+		/*
 		if ( tens == units ) {
 			System.out.println("YES! ");
 		} else {
 			System.out.println("NO! ");
 		}
+		*/
 	}
 
 }
