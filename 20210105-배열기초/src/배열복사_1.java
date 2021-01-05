@@ -22,8 +22,8 @@ public class 배열복사_1 {
 		System.out.println("\n==============forEach================"); //JDK1.5이상, 값을 변경하지 못한다, 출력담당
 		char[] alpha = { 'A', 'B', 'C', 'D', 'E' };
 		System.out.println("저장된 데이터의 개수: " + alpha.length);
-		System.out.println("첫번째 저자된 데이터: " + alpha[0]);
-		System.out.println("마지막에 저장된 데이터: " + alpha[alpha.length - 1]);
+		System.out.println("첫번째 저자된 데이터: " + alpha[0]); // 배열의 첫번째 요소 출력
+		System.out.println("마지막에 저장된 데이터: " + alpha[alpha.length - 1]); // 배열의 마지막 요소 출력
 
 		// 전체 데이터 출력
 

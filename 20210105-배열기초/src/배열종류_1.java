@@ -51,7 +51,7 @@ public class 배열종류_1 {
 
 		// 학점 구하기
 		for (int i = 0; i < 3; i++) {
-			switch ((int) (avg[i] / 10)) {
+			switch ((int) (avg[i] / 10)) { //switch(정수, 문자, 문자열)
 			case 10:
 			case 9:
 				score[i] = 'A';
