@@ -16,8 +16,6 @@ public class 십번 {
 
 	public static void main(String[] args) {
 
-		int tmp = 0;
-
 		Scanner scan = new Scanner(System.in);
 		System.out.print("몇 자리 배열을 만들까요? ");
 		int n = scan.nextInt();
@@ -36,8 +34,8 @@ public class 십번 {
 
 		for (int i = 0; i < arr.length - 1; i++) {
 			for (int k = i + 1; k < arr.length; k++) {
-				if (arr[i] > arr[k]) {
-					tmp = arr[i];
+				if (arr[i] < arr[k]) {
+					int tmp = arr[i];
 					arr[i] = arr[k];
 					arr[k] = tmp;
 				}
