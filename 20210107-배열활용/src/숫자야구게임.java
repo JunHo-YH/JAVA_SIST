@@ -19,8 +19,7 @@
 import java.util.Scanner;
 
 public class 숫자야구게임 {
-
-	public static void main(String[] args) {
+	static void baseBallGame() {
 		// 컴퓨터 정수 3개를 저장
 		int[] com = { 3, 6, 9 };
 
@@ -61,18 +60,18 @@ public class 숫자야구게임 {
 			}
 
 			// 힌트
-//			System.out.printf("Input Number: %d, Result: %dS-%dB\n", input, s, b);
+//					System.out.printf("Input Number: %d, Result: %dS-%dB\n", input, s, b);
 			System.out.println("===== 결과 =====");
 			System.out.print("S: ");
 			for (int i = 0; i < s; i++)
 				System.out.print("●");
-			
+
 			System.out.println();
 			System.out.print("B:");
 			for (int i = 0; i < b; i++)
 				System.out.print("○");
 			System.out.println();
-			
+
 			if (s == 3) {
 				System.out.println("Game Over!!");
 				break;
@@ -80,6 +79,11 @@ public class 숫자야구게임 {
 
 		}
 
+	}
+
+	public static void main(String[] args) {
+		baseBallGame();
+		
 	}
 
 }

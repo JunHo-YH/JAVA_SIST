@@ -52,18 +52,21 @@ public class 달력만들기 {
 		 */
 
 		// 1. 전년도까지의 합
-		int total = (year - 1) * 365 + (year - 1) / 4 - (year - 1) / 100 + (year - 1) / 400;
+		int total = (year - 1) * 365 + (year - 1) / 4 
+				- (year - 1) / 100 
+				+ (year - 1) / 400;
 		// 2. 전달까지의 합
-		int[] lastDay = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		int[] lastDay = { 31, 28, 31, 30, 31, 30,
+				31, 31, 30, 31, 30, 31 };
 		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) // 윤년 2월 => 29
 			lastDay[1] = 29;
 		else
 			lastDay[1] = 28;
-
+		
 		for (int i = 0; i < month - 1; i++) {
 			total += lastDay[i];
 		}
-
+		
 		// 3. +1
 		total++; // 각 달의 1일자 확인
 
