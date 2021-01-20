@@ -16,7 +16,7 @@ public class GameView extends JPanel{
     int x=100,y=300;
     public GameView()
     {
-    	back=Toolkit.getDefaultToolkit().getImage("c:\\javaDev\\back.jpg");
+    	back=Toolkit.getDefaultToolkit().getImage("c:\\javaDev\\background.jpg");
     	avata=Toolkit.getDefaultToolkit().getImage("c:\\javaDev\\player\\my_00.png");
     }
     public void setImage()
