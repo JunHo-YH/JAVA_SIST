@@ -56,6 +56,9 @@ public class MainClass9 {
 			System.out.println("같다");
 		else
 			System.out.println("다르다");
+		
+		// equals를 오버라이딩을 해서 사용할 때와 단지 문자열을 비교하기 위해서 사용할 때를 정확히 구분하자.
+		// 조금 헷갈리는데 여러번 반복해서 용도를 파악해야겠다.
 
 	}
 
