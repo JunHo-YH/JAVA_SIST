@@ -22,7 +22,7 @@ class Box implements Cloneable {
 
 //	@Override
 //	protected Object clone() {
-//		Object obj = null;          지역변수는 항상 초기화를 해줘야한다.1
+//		Object obj = null;          지역변수는 항상 초기화를 해줘야한다.
 //		try {
 //			obj = super.clone(); // super는 Object
 //		} catch (Exception ex) {
