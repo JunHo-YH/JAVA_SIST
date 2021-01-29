@@ -1,13 +1,11 @@
 package com.sist.server;
-// 임시
-import java.util.*; // 데이터 수집 => ArrayList
+// 파일에 저장 =>
+import java.io.FileWriter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.io.*;// 파일에 저장 =>
 /*
  *    자바에서 제공하는 IO(Input,Output)
  *    Input : 파일, 메모리,네트워크에서 데이터 읽기
@@ -28,16 +26,20 @@ public class MovieHtmlParser {
 		 *   <div class="wrap_desc">
 									<a href="/moviedb/main?movieId=135111"
 		 */
+		StringBuffer sb = new StringBuffer();
+		// for안에 try => 오류가 발생 => 제외하고 다시 for을 수행
+		// web사이트 => 모든 정보를 출력하지 않는다.
 		try
 		{
-			int mno=1;// 영화 고유 번호 
-			int cno=1;// 카테고리 번호 
-			for(int i=1;i<=3;i++)
+			int mno=138;// 영화 고유 번호 
+			int cno=3;// 카테고리 번호 
+			for(int i=1;i<=7;i++)
 			{
-				Document doc=Jsoup.connect("https://movie.daum.net/premovie/released?reservationOnly=N&sort=reservation&page="+i).get();
+				Document doc=Jsoup.connect("https://movie.daum.net/boxoffice/weekly"+i).get();
 			    Elements link=doc.select("div.wrap_desc a.desc_movie");
 			    for(int j=0;j<link.size();j++)
 			    {
+			    	try {
 			    	System.out.println(link.get(j).attr("href"));
 			    	Document doc2=Jsoup.connect("https://movie.daum.net"+link.get(j).attr("href")).get();
 			    	// <span class="txt_name">소울(2020)</span>
@@ -50,6 +52,7 @@ public class MovieHtmlParser {
 			    	// s.indexOf("점") => 1+2
 			    	s=s.substring(s.indexOf("점")+3);
 			    	System.out.println(s.replace(" ", ""));
+			    	String ss = s.replace(" ", "");
 			    	// trim() : 공백문자 (좌우) => 중간에 있는 공백을 제거 => replace
 			    	Element genre=doc2.selectFirst("dd.txt_main");
 			    	System.out.println(genre.text());
@@ -61,6 +64,8 @@ public class MovieHtmlParser {
 			    	//1999.11.20  2020.12.23 
 			    	System.out.println(regdate.replaceAll("[가-힣]", "").
 			    			replace("(","").replace(")", ""));
+			    	regdate = regdate.replaceAll("[가-힣]", "").
+			    			replace("(","").replace(")", "");
 			    	String time=s.substring(0,s.indexOf(","));
 			    	time=time.substring(time.lastIndexOf(" ")+1);
 			    	// substring(int begin) => 해당위치
@@ -81,6 +86,22 @@ public class MovieHtmlParser {
 			    	
 			    	Element showUser=doc2.selectFirst("em.emph_g");
 			    	System.out.println(showUser.text());
+			    	
+			    	String msg = mno + "|" + cno + "|"
+			    				+ title.text() + "|"
+			    				+ ss.replace(" ", "") + "|"
+			    				+ genre.text() + "|"
+			    				+ regdate + "|"
+			    				+ time + "|"
+			    				+ grade + "|"
+			    				+ director.text() + "|"
+			    				+ actor.text() + "|"
+			    				+ poster.attr("src") + "|"
+			    				+ showUser.text() + "|"
+			    				+ story.text() + "\r\n";
+			    	sb.append(msg);
+			    	mno++;
+			    	}catch(Exception ex) {ex.printStackTrace();}
 			    	// 1999.11.20 개봉 2020.12.23 (재개봉) 116분, 전체관람가
 			    	// 2021.01.07 개봉 105분, 15세이상관람가
 			    	/*
@@ -108,6 +129,9 @@ public class MovieHtmlParser {
 			    	
 			    }
 			}
+			FileWriter fw = new FileWriter("c:\\javaDev\\daum_movie.txt",true); // 밑에다 추가해서 적으려면 true를 넣어준다.
+			fw.write(sb.toString());
+			fw.close();
 		}catch(Exception ex)
 		{
 			// 에러 메세지 출력 
