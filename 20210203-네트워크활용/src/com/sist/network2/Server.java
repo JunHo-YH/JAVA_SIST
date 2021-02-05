@@ -13,7 +13,7 @@ import java.util.*;// Collection(클라이언트의 정보를 저장=>동기화 
  *    JSP 
  *    =========== 자바+오라클 +HTML
  *    MVC 
- *    ***Spring // GIT
+ *    ***Spring
  *    ============================================
  *    
  *    Collection : 자료구조 (메모리에 저장하고 관리 => CURD) => 표준화 
