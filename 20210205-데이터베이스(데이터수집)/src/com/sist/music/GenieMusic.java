@@ -50,7 +50,7 @@ public class GenieMusic {
             		// À¯Áö
             		// 2ÇÏ°­
             		// 1»ó½Â
-            		String state=str.replaceAll("[^°¡-ÆR]", "");// ÇÑ±ÛÀ» Á¦¿ÜÇÏ°í ³ª¸ÓÁö´Â °ø¹é 
+            		String state=str.replaceAll("[^°¡-ÆR]", "");// ÇÑ±ÛÀ» Á¦¿ÜÇÏ°í ³ª¸ÓÁö´Â °ø¹é  
             		String id="";
             		if(state.equals("À¯Áö"))
             		{
@@ -70,7 +70,6 @@ public class GenieMusic {
     	}catch(Exception ex){ex.printStackTrace();}
     }
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
         GenieMusic gm=new GenieMusic();
         gm.getGenieMusic();
 	}
