@@ -42,7 +42,12 @@ public class MovieManager {
 				vo.setRegdate(st.nextToken());
 				vo.setGrade(st.nextToken());
 				vo.setDirector(st.nextToken());
-				dao.movieInsert(vo);
+				
+				// 오라클 열기
+				dao.movieInsert(vo); // 오라클에 데이터 추가
+				// 오라클 듣기
+				
+				Thread.sleep(100);
 			}
 
 		} catch (Exception ex) {

@@ -49,7 +49,7 @@ public class MovieDAO {
 	public void movieInsert(MovieVO vo) {
 		try {
 			getConnection();
-			String sql = "INSERT INTO movie VALUES(?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO movie VALUES(?,?,?,?,?,?,?,?)"; // 오라클에 데이터 추가
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, vo.getMno());
 			ps.setString(2, vo.getTitle());
