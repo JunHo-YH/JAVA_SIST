@@ -1,14 +1,14 @@
 package com.sist.movie;
 
 /*
- *  MNO         NUMBER(4)     
+ *   MNO         NUMBER(4)     
 	TITLE       VARCHAR2(100) 
 	GENRE       VARCHAR2(100) 
 	POSTER      VARCHAR2(200) 
 	ACTOR       VARCHAR2(300) 
 	REGDATE     VARCHAR2(100) 
 	GRADE       VARCHAR2(50)  
-	DIRECTOR    VARCHAR2(50)  
+	DIRECTOR    VARCHAR2(50) 
  */
 public class MovieVO {
 	private int mno;

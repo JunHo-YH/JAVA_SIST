@@ -1,22 +1,24 @@
 package com.sist.movie;
 
-import java.io.FileReader;
-import java.util.StringTokenizer;
+// 파일을 읽어서 VO에 값을 채운다 
+import java.io.*;
+import java.util.*;
 
 /*
- *  MNO         NUMBER(4)     
+ *   MNO         NUMBER(4)     
 	TITLE       VARCHAR2(100) 
 	GENRE       VARCHAR2(100) 
 	POSTER      VARCHAR2(200) 
 	ACTOR       VARCHAR2(300) 
 	REGDATE     VARCHAR2(100) 
 	GRADE       VARCHAR2(50)  
-	DIRECTOR    VARCHAR2(50)  
+	DIRECTOR    VARCHAR2(50) 
  */
-
+// JDBC ===> DBCP ===> ORM(Mybatis,hibernate)
 public class MovieManager {
 
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		try {
 			MovieDAO dao = new MovieDAO();
 			StringBuffer sb = new StringBuffer();
@@ -26,11 +28,11 @@ public class MovieManager {
 				sb.append(String.valueOf((char) i));
 			}
 			fr.close();
-//			System.out.println(sb.toString());
+			// System.out.println(sb.toString());
 			String data = sb.toString();
 			String[] movie = data.split("\n");
 			for (String s : movie) {
-//				System.out.println(s);
+				System.out.println(s);
 				StringTokenizer st = new StringTokenizer(s, "|");
 				// VO에 저장 => 오라클로 전송
 				MovieVO vo = new MovieVO();
@@ -42,16 +44,12 @@ public class MovieManager {
 				vo.setRegdate(st.nextToken());
 				vo.setGrade(st.nextToken());
 				vo.setDirector(st.nextToken());
-				
 				// 오라클 열기
-				dao.movieInsert(vo); // 오라클에 데이터 추가
-				// 오라클 듣기
-				
+				dao.movieInsert(vo);// 오라클에 데이터 추가
+				// 오라클 닫기
 				Thread.sleep(100);
 			}
-
 		} catch (Exception ex) {
-			ex.printStackTrace();
 		}
 	}
 
