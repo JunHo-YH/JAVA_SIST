@@ -74,7 +74,7 @@ public class GenieMusic {
             		// 데이터 모아서 MusicDAO로 전송 => 오라클에 Insert
             		GenieMusicVO vo = new GenieMusicVO();
             		vo.setNo(k);
-            		vo.setCno(2);   // 1 -> 2 ? 
+            		vo.setCno(2);   // 1 -> 2 ? 순서 확인하기
             		vo.setTitle(title.get(j).text());
             		vo.setSinger(singer.get(j).text());
             		vo.setAlbum(album.get(j).text());
