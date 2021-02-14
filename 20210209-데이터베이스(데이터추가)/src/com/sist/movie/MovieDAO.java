@@ -17,13 +17,15 @@ public class MovieDAO {
 			Class.forName("oracle.jdbc.driver.OracleDriver"); // 오라클하고 연결할 수 있게 드라이버 설치 (소프트웨어)
 			// 리플랙션 => 클래스 정보를 읽어서 메모리 할당 => Properties를 이용하는 방법
 		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 
 	// 오라클 연결
 	public void getConnection() {
 		try {
-			conn = DriverManager.getConnection(URL, "hr", "happy"); // 연결 => 오라클 URL , username , password
+			conn = DriverManager.getConnection(URL, "hr", "happy");
+			// 연결 => 오라클 URL , username , password
 			// conn hr/happy => 오라클 넘어간다
 		} catch (Exception ex) {
 		}
