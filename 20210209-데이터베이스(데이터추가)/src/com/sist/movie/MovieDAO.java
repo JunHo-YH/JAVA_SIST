@@ -10,6 +10,7 @@ public class MovieDAO {
 
 	// jdbc:업체명:IP:PORT:데이터베이스명
 	// thin드라이버 => 연결 (오라클 <==> 자바응용프로그램) => 속도가 늦다 , 무료
+	
 	// 드라이버 등록 => 한번만 설정
 	public MovieDAO() {
 		try {
@@ -42,9 +43,14 @@ public class MovieDAO {
 
 	// 기능 (데이터 추가)
 	/*
-	 * MNO NUMBER(4) TITLE VARCHAR2(100) GENRE VARCHAR2(100) POSTER VARCHAR2(200)
-	 * ACTOR VARCHAR2(300) REGDATE VARCHAR2(100) GRADE VARCHAR2(50) DIRECTOR
-	 * VARCHAR2(50)
+	 * MNO NUMBER(4)
+	 *  TITLE VARCHAR2(100)
+	 *   GENRE VARCHAR2(100)
+	 *    POSTER VARCHAR2(200)
+	 * ACTOR VARCHAR2(300)
+	 *  REGDATE VARCHAR2(100)
+	 *   GRADE VARCHAR2(50)
+	 *    DIRECTOR VARCHAR2(50)
 	 */
 	// 기능
 	public void movieInsert(MovieVO vo) {
