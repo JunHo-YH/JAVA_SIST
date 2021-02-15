@@ -1,4 +1,4 @@
-package com.sist.moive_;
+package com.sist.movie_;
 
 // 파일을 읽어서VO에 값을 채운다.
 import java.io.*;

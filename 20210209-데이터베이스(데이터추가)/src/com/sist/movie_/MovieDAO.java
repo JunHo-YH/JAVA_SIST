@@ -1,4 +1,4 @@
-package com.sist.moive_;
+package com.sist.movie_;
 
 import java.sql.*;
 
