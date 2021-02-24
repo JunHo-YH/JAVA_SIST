@@ -1,0 +1,40 @@
+<!-- 
+     a => 링크 (다른 파일로 이동)
+     형식) <a href="이동할 파일명" target="">
+          = _self (default) => 자신의 페이지
+          = _blank => 브라우저를 새롭게 생성
+     img => 그림 출력 (절대 경로명(X), 서버주소 => jpg,png,gif)
+            bmp(X)
+     형식)
+         <img src="파일명 지정" width,height>
+         
+         WebContent 
+           = image = a.jpg
+           = main = a.html  => a.jpg (../image/a.jpg)
+           => 경로명 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+a {
+     color:black;
+     text-decoration: none;
+}
+a:hover{
+  color:green;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+  <a href="http://www.daum.net" target="_blank">다음</a><br>
+  <a href="http://www.naver.com">네이버</a>
+</body>
+</html>
+
+
+
+
