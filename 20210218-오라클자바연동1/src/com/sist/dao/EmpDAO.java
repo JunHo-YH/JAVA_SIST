@@ -1,4 +1,5 @@
 package com.sist.dao;
+import java.sql.*;
 // 기능별로 만든다 
 /*
  *   게시판 (VO,DAO)
@@ -44,7 +45,6 @@ package com.sist.dao;
  *    4. DELETE   ==> JDBC
  */
 import java.util.*;
-import java.sql.*;
 /*
  *   class A
  *   
