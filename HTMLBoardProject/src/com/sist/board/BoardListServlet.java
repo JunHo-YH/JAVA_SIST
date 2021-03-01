@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import com.sist.dao.*;
-@WebServlet("/BoardListServlet") // 서블릿 에러 해결하기
+@WebServlet("/BoardListServlet")
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
