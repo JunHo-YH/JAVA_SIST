@@ -73,7 +73,7 @@ public class BoardListServlet extends HttpServlet {
 		out.println("<h1>게시판</h1>");
 		out.println("<table border=0 width=700>");
 		out.println("<tr>");
-		out.println("<td><a href=#>새글</a></td>");
+		out.println("<td><a href=BoardInsertServlet>새글</a></td>");
 		out.println("</tr>");
 		out.println("</table>");
 		
