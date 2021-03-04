@@ -24,6 +24,15 @@ public class MovieVO {
 	private String regdate;
 	private String grade;
 	private String director;
+	private int hit;
+
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 
 	public int getMno() {
 		return mno;
