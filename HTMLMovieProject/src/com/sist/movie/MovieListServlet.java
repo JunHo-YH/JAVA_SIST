@@ -70,17 +70,29 @@ public class MovieListServlet extends HttpServlet {
 	    {
 	    	out.println("<div class=\"col-md-3\">");// 12가 되면 => 자동으로 밑으로 내려간다
 	    	out.println("<div class=\"thumbnail\">");
-	    	out.println("<a href=\"#\">");
+	    	out.println("<a href=MovieDetailServlet?mno="+vo.getMno()+">");
 	    	out.println("<img src=\""+vo.getPoster()+"\" class=img-rounded style=\"width:220;height:300px\">");
 	    	out.println("<div class=\"caption\">");
-	    	out.println("<p>"+vo.getTitle()+"</p>");
+	    	out.println("<p style=\"font-size:8pt;font-weight:bold;font-family:맑은 고딕\">"+vo.getTitle()+"</p>");
+	    	//				글자크기 작게해서 줄간격 맞추기
 	    	out.println("</div>");
 	    	out.println("</a>");
 	    	out.println("</div>");
 	    	out.println("</div>");
 	    }
-	    out.println("</div>");
-	    out.println("</div>");
+	    out.println("</div>");//row
+	    
+	    out.println("</div class=row>");
+	    out.println("<div style=\"text-align:center\">");
+	    // btn-lg, btn-sm, btn-md, btn-xs
+	    // btn-success, btn-danger, btn-info, btn-primary, btn-warning, btn-active
+	    out.println("<a href=MovieListServlet?page="+(curpage>1?curpage-1:curpage)+" class=\"btn btn-sm btn-success\">이전</a>");
+	    out.println(curpage+"page / " + totalpage+" pages");
+	    out.println("<a href=MovieListServlet?page="+(curpage<totalpage?curpage+1:curpage)+" class=\"btn btn-sm btn-info\">다음</a>");
+	    out.println("</div>");//div
+	    
+	    out.println("</div>");//row
+	    out.println("</div>");//container
 	    out.println("</body>");
 	    out.println("</html>");
 	}

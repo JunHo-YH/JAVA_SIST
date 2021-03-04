@@ -165,7 +165,40 @@ public class MovieDAO {
 		}
 		return total;
 	}
-	// 3) 영화 상세보기
+	// 3) 영화 상세보기 (mno => 사용자가 포스터를 클릭할 때 넘겨준 번호) => 영화 1개에 대한 정보
+	public MovieVO movieDetailData(int mno) {
+		MovieVO vo = new MovieVO();
+		try {
+			// 1. 연결
+			getConnection();
+			
+			// 2. SQL문장
+			String sql = "SELECT mno, title, poster, genre, actor,"
+					+ "regdate, grade, director "
+					+ "FROM movie "
+					+ "WHERE mno=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			
+			// 결과값 받기
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setMno(rs.getInt(1));
+			vo.setTitle(rs.getString(2));
+			vo.setPoster(rs.getString(3));
+			vo.setGenre(rs.getString(4));
+			vo.setActor(rs.getString(5));
+			vo.setRegdate(rs.getString(6));
+			vo.setGrade(rs.getString(7));
+			vo.setDirector(rs.getString(8));
+			rs.close();
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());// 오류처리
+		}finally {
+			disConnection();// 해제
+		}
+		return vo; // vo에 값을 채워서 넘겨준다.
+	}
 	// 4) 댓글 쓰기
 	// 5) 댓글 삭제
 	// 6) 댓글 수정
