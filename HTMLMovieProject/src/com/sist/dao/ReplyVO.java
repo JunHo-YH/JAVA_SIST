@@ -1,14 +1,13 @@
 package com.sist.dao;
-
 /*
- *  NO      NOT NULL NUMBER       
-	MNO              NUMBER       
-	ID               VARCHAR2(20) 
-	NAME             VARCHAR2(30) 
-	MSG     NOT NULL CLOB         
-	REGDATE          DATE         
-
+ *      NO      NOT NULL NUMBER       
+		MNO              NUMBER       
+		ID               VARCHAR2(20) 
+		NAME             VARCHAR2(30) 
+		MSG     NOT NULL CLOB         
+		REGDATE          DATE  
  */
+
 import java.util.Date;
 
 import lombok.Getter;
@@ -22,8 +21,7 @@ public class ReplyVO {
 	private String id;
 	private String name;
 	private String msg;
-	private Date regdate; // 시간을 가지고 올 수 없다.
-	private String dbday;
+	private Date regdate;// 시간을 가지고 올 수 없다 => TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS')
 
 	public int getNo() {
 		return no;
@@ -81,4 +79,5 @@ public class ReplyVO {
 		this.dbday = dbday;
 	}
 
+	private String dbday;
 }

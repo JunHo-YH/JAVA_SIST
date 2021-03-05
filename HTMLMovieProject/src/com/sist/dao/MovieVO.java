@@ -11,7 +11,7 @@ import lombok.Setter;
 	ACTOR             VARCHAR2(300) 
 	REGDATE           VARCHAR2(100) 
 	GRADE             VARCHAR2(50)  
-	DIRECTOR          VARCHAR2(100) 
+	DIRECTOR          VARCHAR2(100)
  */
 @Setter
 @Getter
@@ -25,14 +25,6 @@ public class MovieVO {
 	private String grade;
 	private String director;
 	private int hit;
-
-	public int getHit() {
-		return hit;
-	}
-
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
 
 	public int getMno() {
 		return mno;
@@ -96,6 +88,14 @@ public class MovieVO {
 
 	public void setDirector(String director) {
 		this.director = director;
+	}
+
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 
 }

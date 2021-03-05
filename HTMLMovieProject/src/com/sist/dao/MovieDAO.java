@@ -27,7 +27,7 @@ public class MovieDAO {
    {
 	   try
 	   {
-		   conn=DriverManager.getConnection(URL,"hr","happy");
+		   conn=DriverManager.getConnection(URL,"system","happy");
 	   }catch(Exception ex) {}
    }
    // 1-3. 오라클 닫기  exit
@@ -292,8 +292,54 @@ public class MovieDAO {
 		   disConnection();
 	   }
    }
-   // 5) 댓글 삭제 
+   // 5) 댓글 삭제  reply_no  movie_no
+   public void replyDelete(int no)
+   {
+	   try
+	   {
+		   // 1. 연결
+		   getConnection();
+		   // SQL
+		   String sql="DELETE FROM webReply "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   // 3. ?에값을 채운다
+		   ps.setInt(1, no);
+		   // 4. 삭제 실행 요청 
+		   ps.executeUpdate();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+   }
    // 6) 댓글 수정 
+   public void replyUpdate(int no,String msg)
+   {
+	   try
+	   {
+		   getConnection();
+		   String sql="UPDATE webReply SET "
+				     +"msg=? "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, msg);
+		   ps.setInt(2, no);
+		   
+		   // 실행 
+		   ps.executeUpdate();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+   }
    // 7) 댓글 읽기
    public ArrayList<ReplyVO> replyListData(int mno)
    {
@@ -331,7 +377,38 @@ public class MovieDAO {
 	   return list;
    }
    // 8) 댓글 몇개인지 확인 
+   public int replyCount(int mno)
+   {
+	   int count=0;
+	   try
+	   {
+		   // 1. 연결
+		   getConnection();
+		   // 2. SQL문장 작성 
+		   String sql="SELECT COUNT(*) "
+				     +"FROM webReply "
+				     +"WHERE mno=?";
+		   // 전송 객체 생성
+		   ps=conn.prepareStatement(sql);
+		   // ?에 값을 채운자
+		   ps.setInt(1, mno);
+		   // 실행 요청 
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   count=rs.getInt(1);
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();//연결 해제
+	   }
+	   return count;
+   }
 }
+
 
 
 

@@ -1,7 +1,6 @@
 package com.sist.movie;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,10 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.dao.MovieDAO;
 import com.sist.dao.MovieVO;
-
+/*
+ *    init() ==> doGet()|doPost() ==> destory()
+ *                                    ========= GC()
+ *                                    새로고침 , 페이지 이동 
+ */
 @WebServlet("/MovieListServlet")
 public class MovieListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -74,20 +78,19 @@ public class MovieListServlet extends HttpServlet {
 	    	out.println("<img src=\""+vo.getPoster()+"\" class=img-rounded style=\"width:220;height:300px\">");
 	    	out.println("<div class=\"caption\">");
 	    	out.println("<p style=\"font-size:8pt;font-weight:bold;font-family:맑은 고딕\">"+vo.getTitle()+"</p>");
-	    	//				글자크기 작게해서 줄간격 맞추기
 	    	out.println("</div>");
 	    	out.println("</a>");
 	    	out.println("</div>");
 	    	out.println("</div>");
 	    }
-	    out.println("</div>");//row
+	    out.println("</div>");// row
 	    
-	    out.println("</div class=row>");
+	    out.println("<div class=row>");
 	    out.println("<div style=\"text-align:center\">");
-	    // btn-lg, btn-sm, btn-md, btn-xs
-	    // btn-success, btn-danger, btn-info, btn-primary, btn-warning, btn-active
+	    // btn-lg,btn-sm,btn-md,btn-xs
+	    // btn-success(녹색),btn-danger(red),btn-info(cyan),btn-primary(blue),btn-warning(주황색),btn-active(gray)
 	    out.println("<a href=MovieListServlet?page="+(curpage>1?curpage-1:curpage)+" class=\"btn btn-sm btn-success\">이전</a>");
-	    out.println(curpage+"page / " + totalpage+" pages");
+	    out.println(curpage+" page / "+totalpage+" pages");
 	    out.println("<a href=MovieListServlet?page="+(curpage<totalpage?curpage+1:curpage)+" class=\"btn btn-sm btn-info\">다음</a>");
 	    out.println("</div>");//div
 	    
@@ -98,6 +101,7 @@ public class MovieListServlet extends HttpServlet {
 	}
 
 }
+
 
 
 
