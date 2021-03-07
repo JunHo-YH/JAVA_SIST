@@ -1,6 +1,7 @@
 package com.sist.dao;
 import java.util.*;//목록 출력(영화) => ArrayList=>브라우저에 전송 
 import java.sql.*;//오라클 연동 
+// 재사용성 있는 코드 => 클래스명만 바꿔서 사용
 public class MovieDAO {
    // 1. 오라클  연결 객체 
    private Connection conn;
