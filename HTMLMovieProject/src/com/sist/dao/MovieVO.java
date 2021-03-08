@@ -13,6 +13,7 @@ import lombok.Setter;
 	GRADE             VARCHAR2(50)  
 	DIRECTOR          VARCHAR2(100)
  */
+// lombok 사용해보기
 @Setter
 @Getter
 public class MovieVO {
