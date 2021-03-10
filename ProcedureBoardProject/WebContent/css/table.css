@@ -1,0 +1,64 @@
+@charset "UTF-8";
+/*테이블 전체 공통으로 적용되는 CSS*/
+.table-content{
+	border-collapse: collapse; /*테이블의 라인선을 한개 통합 */
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	border-top-style: solid;/* 일반 라인선*/
+	border-bottom-style: solid;
+	border-top-color: #333;
+	border-bottom-color: #333;
+}
+/* th , td */
+.table-content th{
+	background: #999;/*바탕색*/
+	color:#fff;/*글자 색상*/
+	border-bottom-width: 1px;
+	border-bottom-color: #333;
+}
+.table-content td{
+	border-bottom-width: 1px;
+	border-bottom-color: #333;
+	border-bottom-style: dotted;
+}
+.table-content .text-left{
+	text-align: left;
+}
+.table-content .text-right{
+	text-align: right;
+}
+.table-content .text-center{
+	text-align: center;
+}
+.table-content .dataTr:hover{
+	background: #FC6;
+	cursor:pointer;
+}
+/* option : <a>, 한줄 전체 선택*/
+a{
+	color:black;
+	text-decoration: none;
+}
+a:hover{
+	color: green;
+	text-decoration: underline;
+}
+/* input , img , select , button => 타원형 */
+input,select,button,textarea{
+	border-radius: 20px;
+}
+.img-circle{
+	border-radius: 100%;
+}
+.img-round{
+	border-radius: 20px;
+}
+
+
+
+
+
+
+
+
+
