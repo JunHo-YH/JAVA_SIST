@@ -1,0 +1,62 @@
+<!-- 
+    가상 선택자 
+    :hover  ==> a,tr... (주로 메뉴)
+    :focus
+    :active
+    
+    :enable ==> input
+    :disable
+    :checked *******
+    
+    :nth-child ==> li,table=목록
+    
+    :not => 미포함 (적용이 안되게 만든다)
+    
+    ::after => new
+    ::before
+    
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.nav ul{
+  list-style-type: none;
+  width:600px;
+  /*background-color: blue;*/
+}
+.nav ul li{
+  width:100px;
+  display: inline-block;
+}
+a{
+   color:black;
+   text-decoration: none;
+}
+a:hover,a:focus{
+  background-color: red;
+  color:white;
+}
+a:active{
+   background-color: green;
+}
+</style>
+</head>
+<body>
+  <div class="nav">
+    <ul>
+      <li><a href="#">홈</a></li>
+      <li><a href="#">현재상영영화</a></li>
+      <li><a href="#">개봉예정영화</a></li>
+      <li><a href="#">영화뉴스</a></li>
+      <li><a href="#">영화예매</a></li>
+    </ul>
+  </div>
+</body>
+</html>
+
+
+
+

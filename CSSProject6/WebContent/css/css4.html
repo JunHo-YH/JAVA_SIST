@@ -1,0 +1,108 @@
+<!-- 
+    속성 선택자
+    
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+ input[value="클릭2"]{
+   background-color: red;
+ }
+ input[type="submit"]{
+   background-color: blue;
+ }
+ input[value="클릭1"]{
+    width:100px;
+    height:100px;
+    border-radius:100px;
+ }
+ div+input{
+   background-color: pink;
+ }
+ a[class ~="button"]{
+    color:green;
+ }
+ /*src안 있는 속성값의 포함된 단어를 찾는 경우*/
+ img[src*="/recipe/"]{
+   border:2px solid red;
+ }
+ img[src*="/rpf/"]{
+   border:2px solid green;
+ }
+ 
+ /*
+     그림
+     
+     element.select("img[src*="/rpf/"]"); 
+     
+     = 데이터 수집 
+       1. 태그안에 class,id
+       2. 속성값으로 찾기 
+       3. 인접,형제,하위...
+ */
+ /*끝나는 문자값  */
+ input[value $="6"]{
+    background-color: magenta;
+ }
+ /*시작문자열 */
+ input[value ^="확"]{
+    background-color: black;
+ }
+ a[title |="kor"]{
+    color:black;
+ }
+ /*
+     *= 특정문자 포함
+     ^= 시작문자
+     $= 끝나는 문자
+ */
+</style>
+</head>
+<body>
+  <input type="button" value="클릭1"><!-- 원형 -->
+  <input type="button" value="클릭2"><!-- red -->
+  <div style="height: 20px"></div>
+  <input type="button" value="클릭3"><!-- pink -->
+  <input type="button" value="클릭3">
+  <input type="submit" value="클릭4"><!-- blue -->
+  <input type="reset" value="클릭5"><!-- cyan -->
+  <input type="reset" value="클릭6"><!-- magenta -->
+  <input type="reset" value="확인"><!-- magenta -->
+  <a href="#" class="btn button">HTML1</a>
+  <a href="#" class="btn btn-sm">HTML2</a>
+  <a href="#" class="btn btn-xs">HTML3</a>
+  <!-- <li class="common_sp_list_li">
+                <div class="common_sp_thumb">
+                    <a href="/recipe/6940325" class="common_sp_link">
+                                                <img src="https://recipe1.ezmember.co.kr/cache/recipe/2020/08/28/c37e0db0e0386d453eda2be45e26b9c01_m.jpg">
+                    </a>
+                </div>
+                <div class="common_sp_caption">
+                    <div class="common_sp_caption_tit line2">닭봉간장조림~ 십년째 만들어 먹는 양념 공유해요!</div>
+                    <div class="common_sp_caption_rv_name" style="display: inline-block; vertical-align: bottom;">
+                        <a href="/profile/recipe.html?uid=reora"><img src="https://recipe1.ezmember.co.kr/cache/rpf/2020/06/25/e95dbdcf4122fe67c45511b5c4f6f4c71.jpg">요리하는러라</a>
+                    </div>
+                    <div class="common_sp_caption_rv">
+                                                    <span class="common_sp_caption_rv_star"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_star2_on.png"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_star2_on.png"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_star2_on.png"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_star2_on.png"><img src="https://recipe1.ezmember.co.kr/img/mobile/icon_star2_on.png"></span>
+                            <span class="common_sp_caption_rv_ea">(64)</span>
+                                                <span class="common_sp_caption_buyer" style="vertical-align: middle;">조회수 7.1만</span>
+                    </div>
+                </div>
+            </li> -->
+   <a href="#" title="kor-1">국어1</a>
+   <a href="#" title="eng">영어</a>
+   <a href="#" title="kor-2">국어2</a>
+   
+   
+   
+</body>
+</html>
+
+
+
+
+
+

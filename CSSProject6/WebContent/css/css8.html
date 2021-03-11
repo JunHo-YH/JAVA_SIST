@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+ul li{
+  margin: 15px;
+}
+li.top::before{
+  content:"NEW!!";
+  font-size: 9px;
+  padding: 2px 4px;
+  margin: 0 10px;
+  border-radius: 2px;
+  background: #f00;
+  color:#fff;
+}
+</style>
+</head>
+<body>
+  <ul>
+    <li class="top">제품 A</li>
+    <li>제품 B</li>
+    <li>제품 C</li>
+    <li>제품 D</li>
+    <li class="top">제품 E</li>
+  </ul>
+</body>
+</html>

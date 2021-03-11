@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/* 자식선택자 부모>자식*/
+/*부모*/    /*자식*/
+/*#container > ul{
+   border:1px solid #999;
+}*/
+/* 인접 형제 선택자  태그(아이디명,클래스명)+태그(아이디명,클래스명)*/
+/*span+p{
+  text-decoration: underline;
+}*/
+/*형제 선택자 ~ */
+p ~ ul {
+  color:pink;
+}
+span ~ p{
+  color:green;
+}
+</style>
+</head>
+<body>
+  <div id="container">
+    <span><h1>영화 예매</h1></span>
+    <p>방법</p>
+    <ul>
+       <li>예매방법
+         <ul>
+           <li>온라인 예매</li>
+           <li>직접 예매</li>
+         </ul>
+        </li>
+        <li>금액
+          <ul>
+            <li>성인:13000원</li>
+            <li>청소년:8000원</li>
+            <li>조조:10000원</li>
+          </ul>
+        </li>
+    </ul>
+  </div>
+</body>
+</html>
+
+
+

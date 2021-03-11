@@ -1,0 +1,56 @@
+<!-- 
+     disable:비활성화 
+     checked:선택된 경우 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+input:disabled{
+  background: #ddd;
+  border:1px red solid;
+}
+/*
+    <input type=checkbox>
+    <input type=radio>
+    ============================= checked
+    <select>
+    ============================= selected
+*/
+input:checked+span{
+  color:red;
+}
+</style>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <legend>사용자 정보</legend>
+      <label>이름:<input type=text disabled size=15></label>
+    </fieldset>
+    <fieldset>
+      <legend>취업처</legend>
+      <p>과정을 배우면 어디 취업할까?</p>
+      <label><input type=radio name="job" value="개발"><span>개발</span></label>
+      <!-- 
+            SM / SI / 솔루션 / 프레임워크 ******
+       -->
+      <label><input type=radio name="job" value="아이템"><span>아이템기획</span></label>
+      <label><input type=radio name="job" value="설계"><span>설계</span></label>
+      <label><input type=radio name="job" value="영업"><span>기술영업</span></label>
+      <label><input type=radio name="job" value="강사"><span>강사</span></label>
+    </fieldset>
+  </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
