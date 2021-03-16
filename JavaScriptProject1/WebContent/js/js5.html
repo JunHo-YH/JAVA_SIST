@@ -1,0 +1,70 @@
+<!-- 
+    논리 연산자 , 대입연산자 ,삼항연산자 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// 논리연산자  (조건) && (조건) , (조건) || (조건)
+/*
+ *              &&(직렬)  ||(병렬)
+       =========================
+    	T  T   true     true
+       =========================
+    	T  F   false    true
+       =========================
+    	F  T   false    true
+       =========================
+    	F  F   false    false 
+       =========================
+ */
+ // $(function(){}) => Jquery
+ window.onload=function(){
+	//    ture     true = true
+	var a=(6<7) && (6!=7);
+	console.log("a="+a);
+    //  ture     false = false 
+	var b=(6<7) && (6===7);
+	console.log("b="+b);
+	// ES5에서는 ;을 사용하니 않으면 오류 , ES6에서는 ;을 생략할 수 있다 
+	
+	//  false     true = false 
+	var c=(6>7) && (6!==7)
+	console.log("c="+c)
+	//  false    false = false 
+	var d=(6>7) && (6===7)
+	console.log("d="+d);
+	
+	a=(6<7) || (6!=7);
+	console.log("a="+a);
+	
+	b=(6<7) || (6===7);
+	console.log("b="+b);
+	// ES5에서는 ;을 사용하니 않으면 오류 , ES6에서는 ;을 생략할 수 있다 
+	c=(6>7) ||(6!==7)
+	console.log("c="+c)
+	
+	d=(6>7) || (6===7)
+	console.log("d="+d);
+	
+	var e=2;
+	var result=e===1?"남자":"여자"; // 삼항연산자 => if~else
+	console.log("result="+result);
+	
+	// 대입연산자  ( = , += , -= )
+	var k=100;
+	console.log("k="+k)
+	k+=200; // k=k+200 => 300
+	console.log("k="+k)
+	k-=150; // k=k-150 => k=300-150 => 150
+	console.log("k="+k)
+	
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

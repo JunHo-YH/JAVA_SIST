@@ -1,0 +1,49 @@
+<!-- 
+    연산자 
+      단항연산자 (++ , --,!)
+      이항연산자 
+        = 산술연산자 (+,-,*,/,%)
+        = 비교연산자 (==,===,!=,!==,<,>,<=,>=)
+        = 논리연산자 (&& , ||)
+        = 대입연산자 (=,+=,-=,*=,/=...)
+      삼항연산자 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// 단항연산자 
+window.onload=function(){
+	var a=10;
+	//var b=a++;
+	/*
+	      b=a ==> b=10
+	      a=a+1 => a=11
+	*/
+	var b=++a;
+	/*
+	     a=a+1  => a=11
+	     b=a    => b=11
+	*/
+	// --a : 전치연산자 , a-- : 후치연산자 
+	console.log("a="+a);
+	console.log("b="+b);
+	
+	// 부정연산자 
+	var c=true;
+	c=!c;
+	console.log("c="+c);
+	
+	var d=0; // !는 결과값이 boolean (1:true(0이 아닌 수),0:false)
+	d=!d;
+	console.log("d="+d);
+
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

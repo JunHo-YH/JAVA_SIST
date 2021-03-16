@@ -1,0 +1,99 @@
+<!-- 제어문 
+     조건문 
+       = 단일 조건문
+       if(조건)
+       {
+          처리 => 조건이 true일 경우에 처리
+       }
+       
+       = 선택 조건문 (true일 경우,false일 경우를 나눠서 처리)
+       if(조건)
+       {
+           조건 : true일때 처리
+       }
+       else
+       {
+          조건 : false일때 처리
+       }
+       
+       = 다중 조건문 (여러의 조건중에 해당되는 조건 1개만 수행)
+       if(조건)
+       {
+          조건 : true일때 처리 ==> 종료
+       }
+       else if(조건)
+       {
+          조건 : true일때 처리 ==> 종료
+       }
+       else if(조건)
+       {
+          조건 : true일때 처리 ==> 종료
+       }
+       else
+       {
+          해당 조건이 없는 경우에 처리하는 문장  ==> 종료 (default)
+       }
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// 조건문 
+window.onload=function(){
+	var count=1; // SELECT COUNT(*) FROM member WHERE id='admin';
+	if(count===0)
+	{
+		console.log("ID를 사용할 수 있습니다!!");
+	}
+	if(count!=0)
+	{
+		console.log("이미 사용중이 ID입니다!!\n다시 입력하세요!!");
+	}
+	// if => 사용자의 입력값이 있는지 여부
+}
+
+function send()
+{
+	var id=document.getElementById("id");
+	var pw=document.getElementById("pwd");
+	var idp=document.getElementById("idp");
+	var pwp=document.getElementById("pwp");
+	
+	if(id.value==="") // NOT NULL
+	{
+		idp.innerHTML="ID를 입력하세요";
+	}
+	else
+	{
+		idp.innerHTML="";
+	}
+	if(pw.value==="")  // NOT NULL
+	{
+		pwp.innerHTML="비밀번호를 입력하세요";
+	}
+	else
+	{
+		pwp.innerHTML="";
+	}
+}
+</script>
+</head>
+<body>
+  <form method=post name=frm>
+   ID:<input type=text id=id size=15><br>
+   <span id="idp" style="color:red"></span><br>
+   PW:<input type=password id=pwd size=15><br>
+   <span id="pwp" style="color:red"></span><br>
+   <input type=button value="로그인" onclick="send()">
+  </form>
+</body>
+</html>
+
+
+
+
+
+
+

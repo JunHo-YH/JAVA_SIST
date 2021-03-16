@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=function(){
+	var kor=80;
+	var eng=70;
+	var math=88;
+	var total=kor+eng+math;
+	var avg=total/3.0;
+	
+	console.log("국어점수:"+kor)
+	console.log("영어점수:"+eng)
+	console.log("수학점수:"+math)
+	console.log("총점:"+total)
+	console.log("평균:"+avg);
+	
+	var score='A';
+	if(avg>=90)
+		score='A';
+	else if(avg>=80)
+		score='B';
+	else if(avg>=70)
+		score='C';
+	else if(avg>=60)
+		score='D';
+	else
+		score='F';
+	
+	console.log("학점:"+score);
+	
+	// 자동 지정 변수 : var을 사용하지 말고 => let(scope가 명확)
+	var a=100;
+	if(a===100)
+	{
+	   var b=200;// 사용범위가 명확하지 않기때문에 나중에 문제가 발생할 수 있다	
+	   let c=300;// 블록을 벗어나면 사라진다 (권장)
+	}// b가 사라져야 한다 
+	console.log("b="+b);
+	console.log("c="+c);// 사용이 불가능 
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

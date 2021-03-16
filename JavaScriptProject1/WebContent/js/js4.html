@@ -1,0 +1,60 @@
+<!-- 이항연산자 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// 이항연산자 
+window.onload=function(){
+	var a=10;
+	var b=-3;
+	
+	//+ 
+	console.log(a+"+"+b+"="+(a+b)); // + (산술,문자열 결합이 가능)
+	console.log(a+"-"+b+"="+(a-b));
+	console.log(a+"*"+b+"="+(a*b));
+	console.log(a+"/"+b+"="+(a/b));// 정수/정수=실수
+	console.log(a+"%"+b+"="+(a%b));
+	
+	var kk="10"/"20";// 자동으로 정수로 변환후 처리(산술중에 +를 제외한 연산)
+	
+	// + : 산술 , 문자열 
+	console.log(10+"Hello");
+	console.log("10"+"20"); // 1020
+	console.log("kk="+kk)
+	/*
+	     % => 남는 값이 왼쪽부호를 따라간다 
+	       - % +  (-)
+	       - % -  (-)
+	       + % -  (+)
+	       + % +  (+)
+	*/
+	
+	// 비교연산자 (조건과 관련 : 결과값은 true/false)
+	var c=10;
+	var d=9;
+	var r1=10==9; //false
+	var r2=10===9; // false ==> ES6부터는 같다: ===
+	var r3=10!=9; // true
+	var r4=10!==9; // true   => 같지 않다: !==
+	var r5=10<9; // false
+	var r6=10>9; // ture
+	var r7=10<=9; // false
+	var r8=10>=9; //true
+	console.log("r1="+r1);
+	console.log("r2="+r2);
+	console.log("r3="+r3);
+	console.log("r4="+r4);
+	console.log("r5="+r5);
+	console.log("r6="+r6);
+	console.log("r7="+r7);
+	console.log("r8="+r8);
+	console.log("r9="+r9);
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>
