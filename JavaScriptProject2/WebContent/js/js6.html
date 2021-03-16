@@ -1,0 +1,42 @@
+<!-- 
+      1) function 함수명()
+         {
+         }
+      2) => 화살표 함수 
+         let add=()=>{}
+         => let add=function(){}
+         => let add=(a,b)=>a+b
+         => let add=function(a,b){return a+b} => this
+        
+      public class A
+      {
+          public A(){this=A}
+          B b=new B(){
+             this=B
+             public void display(){}
+          }
+      }
+      public class B
+      {
+         public void display(){}
+      }
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*let display=function(){
+	document.write("Hello");
+}*/
+let display=()=>{
+	document.write("Hello");
+}
+display();
+</script>
+</head>
+<body>
+
+</body>
+</html>

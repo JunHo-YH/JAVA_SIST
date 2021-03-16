@@ -1,0 +1,81 @@
+<!-- 
+  배열 이용 => 객체 
+  let 변수명=[{},{},{},{},{}]
+  객체 표현법
+    => {키:값,키:값....}
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=function(){
+	/*
+	   class Sawon
+	   {
+	      int sabun;
+	      String name,dept,job,hiredate;
+	      int pay;
+	   }
+	Sawon a=new Sawon(); => a.sabun
+	
+	    자바 ===> 데이터 ===> 자바스크립트 
+	           JSON/XML
+	    자바 ===> 데이터 ===> Ajax , VueJs , ReactJS
+	*/
+	/*let sawom={sabun:1,name:"홍길동",dept:"개발부",job:"대리",hiredate:"2019-01-01",pay:3800} //{}가 한명에 대한 정보 => class
+    console.log("사번:"+sawom.sabun);
+	console.log("이름:"+sawom.name);
+	console.log("부서:"+sawom.dept);
+	console.log("직위:"+sawom.job);
+	console.log("입사일:"+sawom.hiredate);
+	console.log("연봉:"+sawom.pay);*/
+	let info=[
+		       {sabun:1,name:"홍길동",dept:"개발부",job:"대리"},
+		       {sabun:2,name:"심청이",dept:"기획부",job:"부장"},
+		       {sabun:3,name:"춘향이",dept:"영업부",job:"과장"},
+		       {sabun:4,name:"박문수",dept:"자재부",job:"사원"},
+		       {sabun:5,name:"강감찬",dept:"총무부",job:"주임"}
+		     ];
+	// sawon = {sabun:1,name:"홍길동",dept:"개발부",job:"대리"}
+	info.forEach(function(sawon){
+		document.write(sawon.sabun+" "+sawon.name+" "+sawon.dept+" "+sawon.job+"<br>");
+	});
+	document.write("<hr>");
+	info.map(function(sawon){
+		document.write(sawon.sabun+" "+sawon.name+" "+sawon.dept+" "+sawon.job+"<br>");
+	});
+	
+	document.write("<hr>");
+	info.forEach((sawon)=>{
+		document.write(sawon.sabun+" "+sawon.name+" "+sawon.dept+" "+sawon.job+"<br>");
+	});
+	
+	document.write("<hr>");
+	info.map((sawon)=>{
+		document.write(sawon.sabun+" "+sawon.name+" "+sawon.dept+" "+sawon.job+"<br>");
+	});
+	
+	document.write("<hr>");
+	for(let sawon of info)
+	{
+		document.write(sawon.sabun+" "+sawon.name+" "+sawon.dept+" "+sawon.job+"<br>");
+	}
+	
+	document.write("<hr>");
+	for(let i=0;i<info.length;i++)
+	{
+		document.write(info[i].sabun+" "+info[i].name+" "
+				+info[i].dept+" "+info[i].job+"<br>");
+	}
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+

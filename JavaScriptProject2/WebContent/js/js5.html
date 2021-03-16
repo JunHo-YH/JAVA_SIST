@@ -1,0 +1,82 @@
+<!-- 
+   함수 : 재사용의 목적 , 한개의 기능 처리 
+   형식) 
+        function 함수명() // 선언부
+        {
+           구현부 
+        }
+        ===================================
+        사용자 요청 값(매개변수)   실제 결과값(리턴값)
+        ===================================
+             O                    O
+             
+             // 태그제어 => 입력여부 , 체크박스, 별점 , 가격계산 
+             function 함수명(a,b) ==> (10,"Java")
+             {
+                 return a+b;
+             }
+        ===================================
+             O                    X
+             function 함수명(a,b)
+             {
+                    처리 
+             }
+        ===================================
+             X                    O
+             
+             function 함수명()
+             {
+                return 값
+             }
+        ===================================
+             X                    X
+             
+             function 함수명()
+             {
+                 처리 
+             }
+        ===================================
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function add(a,b)
+{
+	return a*b;// 산술 연산자 ( +(문자열일 경우에 문자열 결합) ,
+			//  - , * , / , % => 정수로 변환하고 실제 산술 처리)
+}
+function display(a,b)
+{
+	document.write("sum="+(a+b));
+}
+
+function disp()
+{
+	return "서울시 마포구";
+}
+function disp2()
+{
+	let p=document.getElementById("pp");
+	p.innerHTML="<h1>Hello</h1>"
+}
+window.onload=function()
+{
+	//let sum=add("100","200");
+	//document.write("sum="+sum);
+	//display(10,20);
+	//let addr=disp();
+	//document.write("주소:"+addr);
+	disp2();
+}
+</script>
+</head>
+<body>
+  <p id="pp"></p>
+</body>
+</html>
+
+
+

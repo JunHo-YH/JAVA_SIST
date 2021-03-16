@@ -1,0 +1,74 @@
+<!-- 
+    for => 배열 , JSON => Ajax
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// 일반 for
+/*
+ *  
+ *        1 →  2    4
+ *   for(변수;조건문;증감식)
+	 {
+	           ↓    ↑
+	     반복 처리문장 3    
+	 }
+ */
+/*window.onload=function()
+{
+	for(let i=1;i<=10;i++)
+	{
+	   document.write(i+"&nbsp;");	// <body>안에 출력
+	}
+}*/
+// for - of , for - in => Collection
+window.onload=function()
+{
+	// 배열 선언 
+	let names=["홍길동","심청이","박문수","이순신","춘향이"];
+	let sexs=["남자","여자","남자","남자","여자"];
+	for(let i=0;i<names.length;i++)
+	{
+		document.write(names[i]+"<br>");
+	}
+	document.write("<hr>");
+	// for - of => forEach구문 
+	for(let n of names)
+	{
+		document.write(n+"<br>");
+	}
+	// for - in => index번호 => 배열 여러개를 동시에 수행할 때 주로 사용
+	document.write("<hr>");
+	for(let i in names)
+	{
+		document.write(i+":"+names[i]+"("+sexs[i]+")<br>");
+	}
+	document.write("<hr>");
+	names.forEach(name=>{
+		document.write(name+"<br>");
+	})
+	document.write("<hr>");
+	names.forEach(function(name){
+		document.write(name+"<br>");
+	})
+	document.write("<hr>"); 
+	// 권장
+	names.map(name=>{
+		document.write(name+"<br>");
+	})
+	document.write("<hr>");
+	names.map(function(name){
+		document.write(name+"<br>");
+	})
+	
+}
+// forEach , map
+</script>
+</head>
+<body>
+
+</body>
+</html>

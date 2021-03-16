@@ -1,0 +1,192 @@
+<!-- 
+     JavaScript (.js)
+     = 내부 스크립트 (단순한 프로그램) => 태그에 대한 이벤트 처리
+         태그제어 (속성,값,태그)
+         <head>
+           <script type="text/javascript">
+             처리 기능 
+           </script>
+         </head>
+         <body>
+            <script type="text/javascript">
+             처리 기능 
+            </script>
+         </body>
+     = 외부 스크립트 : 반복 , 여러개의 파일에서 사용 (파일로 제작 .js)
+                    = 라이브러리
+     = 인라인 스크립트 :
+         <input type=button onclick="javascript:history.back()">
+     ===============================================
+       통일성 => 라이브러리 (프레임워크)
+               JQuery,VueJS,ReactJS
+       예)
+           함수 
+           function add()
+           {
+           }
+           
+           const add=function(){}
+           const add=()=>{}
+           
+           $('').click()
+           
+       => 1. 변수 선언 
+             = 자동 지정 변수 
+               var 
+               let  (지역변수=>사용범위를 명확하게 준다)
+               const (상수)
+               ============
+               지원하는 데이터형 
+                 Number : (정수,실수)
+                 String : 문자열  => '' , ""
+                          문자열 비교 (===)
+                 Boolean: true  / false 
+                          ====(1) ===== (0)
+                 10<11 && 20>30
+                 =====    =====
+                   1        0  ==> 0
+                 Object : {}
+                 Array : [] => 데이터형을 다르게 사용해도 된다
+                 let a=10;
+                 a="JS"
+          2. 연산자 
+               = 단항연산자 (++,--,!)
+               = 산술연산자 (+,-,*,/,%) => /: 정수/정수=실수
+                 "10"+"20" => 1020
+                 "10"*"20" => 200
+               = 비교연산자 ( === , !== ) : VueJS
+               = 논리연산자 ( && , || )
+               = 대입연산자 ( = , += , -= )
+               = 삼항연산자 ( (조건)?값1:값2 )
+                     조건 : true => 값1
+                     조건 : false => 값2
+          3. 제어문 
+               = 조건문 
+                  if(조건)
+                  {
+                     조건이 true일 경우에 처리 
+                  }
+                  =========================
+                  if(조건)
+                  {
+                     조건이 true일 경우에 처리 
+                  }
+                  else
+                  {
+                     조건이 false일 경우에 처리 
+                  }
+                  =========================
+                  if(조건)
+                  {
+                     조건이 true일 경우에 => 수행 종료
+                     조건이 false일 경우에 => 다음 조건으로 이동 
+                  }
+                  else if(조건)
+                  {
+                     조건이 true일 경우에 => 수행 종료
+                     조건이 false일 경우에 => 다음 조건으로 이동
+                  }
+                  else if(조건)
+                  {
+                     조건이 true일 경우에 => 수행 종료
+                     조건이 false일 경우에 => 다음 조건으로 이동
+                  }
+                  else
+                  {
+                      해당되는 조건이 없는 경우에 수행 
+                  }
+               = 선택문 
+                 switch(값)
+                 {
+                   case 라벨:
+                     처리 
+                     break;
+                   case 라벨:
+                     처리 
+                     break;
+                   default:
+                     처리 
+                 }
+               = 반복문 
+                 = do~while : 한번이상 수행 (조건을 나중에 검색)
+                 = while : 반복횟수가 지정되지 않는 경우 
+                 = for : 반복횟수가 지정 
+                   1) 일반 for
+                   =====================================
+                   2) for ~ of(실제 값) , for ~ in(index)
+                   3) forEach
+                   4) map
+                   ===================================== 배열
+               = 반복제어문 
+                 = break
+                 = continue
+          4. 배열
+              let arr=[10,20,30,"",""];
+              let arr=Array(10,20,30...)
+              배열 값추가 => arr.push()
+          5. 함수 
+              => 이벤트 처리 
+              function 함수명(){
+                  처리
+              }
+              
+              const func=function(){
+                처리
+              }
+              
+              // => 화살표 함수 (람다식) => function,return을 생략 
+              const func=()=>{
+                  처리
+              }
+              
+              => func() : 호출 
+              
+              const func=(a,b)=>a+b; // NodeJS , VueJS,ReactJS
+              
+              (a,b)=>
+              {
+                  a+b;
+              }
+              
+              func(10,20) => a+b => 30
+          6. 객체지향 
+          7. 라이브러리
+          8. DOM => 태그 제어 (Ajax)
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// do~while : 후조건 (무조건 문장을 한번은 수행)
+/*
+ *   형식 
+       초기값   =============== 1 (한번만 수행)
+       do
+       {
+    	  반복 수행문장 ========= 2
+    	  증감식( ++ , -- ) === 3
+       }while(조건문);  ======= 4 ↑2
+ */
+ window.onload=function(){
+    let i=1;
+    do
+    {
+    	console.log("i="+i);
+    	i++;
+    }while(i<=10);
+ }
+</script>
+</head>
+<body>
+  <p id="pp"></p>
+</body>
+</html>
+
+
+
+
+
+
+
