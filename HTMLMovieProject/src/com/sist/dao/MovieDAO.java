@@ -23,7 +23,7 @@ public class MovieDAO {
 		   Class.forName("oracle.jdbc.driver.OracleDriver");
 	   }catch(Exception ex){}
    }
-   // 1-2. 오라클 연결  conn hr/happy
+   // 1-2. 오라클 연결  conn system/happy
    public void getConnection()
    {
 	   try
