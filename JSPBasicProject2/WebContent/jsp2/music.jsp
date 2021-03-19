@@ -35,7 +35,7 @@ $(function(){
 		// detail.jsp?no=1
 		$.ajax({
 			type:'POST',
-			url:'musicDetail.jsp',
+			url:'musicDetail.jsp',      // musicDetail.jsp의 페이지 전체를 '.col-sm-4'위치에 .html(result) 페이지를 보여라 !
 			data:{"no":no},
 			success:function(result)
 			{
