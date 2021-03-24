@@ -1,6 +1,6 @@
 package com.sist.temp;
 
-import java.util.Date;
+import java.util.*;
 
 public class EmpVO {
 	private int empno;
