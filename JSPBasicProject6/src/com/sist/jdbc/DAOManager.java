@@ -21,6 +21,7 @@ public class DAOManager {
 		  {
 			  conn=DriverManager.getConnection(URL,"hr","happy");
 		  }catch(Exception ex) {}
+		  
 		  return conn;
 	  }
 	  public void disConnection(Connection conn,PreparedStatement ps)
@@ -31,5 +32,4 @@ public class DAOManager {
 			  if(conn!=null) ps.close();
 		  }catch(Exception ex) {}
 	  }
-
 }

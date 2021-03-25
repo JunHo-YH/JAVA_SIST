@@ -1,5 +1,12 @@
 package com.sist.dao;
 
+/*
+ *   	NO     NOT NULL NUMBER           
+		TITLE   NOT NULL VARCHAR2(300) 
+		SUBJECT NOT NULL VARCHAR2(300) 
+		POSTER  NOT NULL VARCHAR2(260) 
+		LINK    NOT NULL VARCHAR2(260) 
+ */
 public class FoodCategoryVO {
 	private int no;
 	private String title;
