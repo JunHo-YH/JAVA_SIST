@@ -167,6 +167,52 @@ public class FoodDAO {
 		 }
 		 return list;
 	 }
+	 
+	 
+	 /*
+	  * private int no, cno, good, soso, bad;
+		private String poster, title, address, tel, type, price, parking, time, menu;
+		private double score;
+	  * 
+	  */
+	 
+	 public FoodVO foodDetailData(int no) {
+		 FoodVO vo = new FoodVO();
+		 try {
+			 getConnection();
+			 String sql = "SELECT no, poster, title, address, tel, price, parking, time, NVL(menu,'no'), "
+			 			+ "score, good, soso, bad, type "
+			 			+ "FROM food_house "
+			 			+ "WHERE no = ?";
+			 ps = conn.prepareStatement(sql);
+			 ps.setInt(1, no);
+			 ResultSet rs = ps.executeQuery();
+			 rs.next();
+			 vo.setNo(rs.getInt(1));
+			 vo.setPoster(rs.getString(2));
+			 vo.setTitle(rs.getString(3));
+			 vo.setAddress(rs.getString(4));
+			 vo.setTel(rs.getString(5));
+			 vo.setPrice(rs.getString(6));
+			 vo.setParking(rs.getString(7));
+			 vo.setTime(rs.getString(8));
+			 vo.setMenu(rs.getString(9));
+			 vo.setScore(rs.getDouble(10));
+			 vo.setGood(rs.getInt(11));
+			 vo.setSoso(rs.getInt(12));
+			 vo.setBad(rs.getInt(13));
+			 vo.setType(rs.getString(14));
+			 rs.close();
+			 
+		 }catch(Exception ex) {
+			 ex.printStackTrace();
+		 }finally {
+			 disConnection();
+		 }
+		 
+		 
+		 return vo;
+	 }
 }
 
 

@@ -31,10 +31,15 @@
          <table class="table">
           <tr>
             <td width=30% class="text-center" rowspan="3">
+            <a href="main.jsp?mode=2&no=<%=fvo.getNo()%>"><!--JSPChange의 인덱스 번호 고려  -->
              <img src="<%=fvo.getPoster() %>" width=100%>
+            </a>
+            
             </td>
             <td width="70%">
+             <a href="main.jsp?mode=2&no=<%=fvo.getTitle()%>">
              <h3><%=fvo.getTitle() %><span style="color:orange"><%=fvo.getScore() %></span></h3>
+            </a>
             </td>
           </tr>
           <tr>
