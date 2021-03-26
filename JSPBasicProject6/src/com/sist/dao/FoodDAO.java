@@ -85,6 +85,9 @@ public class FoodDAO {
 		 }
 		 return list;
 	 }
+	 
+	 
+	 
 	 public List<FoodCategoryVO> foodCategoryLinkData()
 	 {
 		 List<FoodCategoryVO> list=new ArrayList<FoodCategoryVO>();
