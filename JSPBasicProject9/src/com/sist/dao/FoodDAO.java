@@ -213,6 +213,35 @@ public class FoodDAO {
 		 
 		 return vo;
 	 }
+	 public List<FoodVO> foodLocation(String gu) {
+		 List<FoodVO> list = new ArrayList<FoodVO>();
+		 try {
+			 getConnection();
+			 String sql = "SELECT no, title, poster, type, address, price, rownum "
+			 			+ "FROM food_house "
+			 			+ "WHERE address LIKE '%'||?||'%' AND rownum <=5 ";
+			 ps = conn.prepareStatement(sql);
+			 ps.setString(1, gu);
+			 ResultSet rs = ps.executeQuery();
+			 while(rs.next()) {
+				 FoodVO vo = new FoodVO();
+				 vo.setNo(rs.getInt(1));
+				 vo.setTitle(rs.getString(2));
+				 vo.setPoster(rs.getString(3));
+				 vo.setType(rs.getString(4));
+				 vo.setAddress(rs.getString(5));
+				 vo.setPrice(rs.getString(6));
+				 list.add(vo);
+			 }
+			 rs.close();
+			 
+		 }catch(Exception ex) {
+			ex.printStackTrace(); 
+		 }finally {
+			 disConnection();
+		 }
+		 return list;
+	 }
 }
 
 

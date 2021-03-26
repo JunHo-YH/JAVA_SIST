@@ -9,9 +9,20 @@
 <jsp:useBean id="dao" class="com.sist.dao.FoodDAO"></jsp:useBean>
 <!--메모리를 자동관리해준다.  -->
 <%
-String no = request.getParameter("no");
-//FoodDAO dao = new FoodDAO(); => useBean으로 처리 => 메모리 누적 방지
-FoodVO vo = dao.foodDetailData(Integer.parseInt(no));
+	String no = request.getParameter("no");
+	String cno = request.getParameter("cno");
+	//FoodDAO dao = new FoodDAO(); => useBean으로 처리 => 메모리 누적 방지
+	FoodVO vo = dao.foodDetailData(Integer.parseInt(no));
+	String s = vo.getAddress();
+	//s = s.substring(s.indexOf(" ")+1, s.indexOf("구")+1);
+	// 서울특별시 마포구 와우산로18길 10 2F 
+	// System.out.println(s);
+	String ss = s.substring(s.indexOf(" ")+1);
+	ss = ss.substring(0,ss.indexOf(" "));
+	System.out.println(ss);
+	
+	List<FoodVO> list = dao.foodLocation(ss);
+	
 %>
 
 <!DOCTYPE html>
@@ -140,7 +151,47 @@ FoodVO vo = dao.foodDetailData(Integer.parseInt(no));
 									}
 								});
 			</script>
+			<div style = "height:20px"></div>
+			<table class="table">
+				<catpion><b>주변 인기 맛집</b></catpion>
+				<%
+					for(FoodVO fvo:list) {
+				%>
+					<tr>
+						<td><img src="<%=fvo.getPoster().substring(0,fvo.getPoster().indexOf("^")) %>" width=30 height=30></td>
+						<td><%=fvo.getTitle() %></td>
+						<td><%=fvo.getType() %></td>
+						<td><%=fvo.getPrice() %></td>
+					</tr>
+				<%						
+				
+					}
+				%>
+				
+			</table>
+			
+			<div style="height:20px"></div>
 			<div style="height:30px"></div>
+		</div>
+		<div style="height: 30px"></div>
+		<div class="row">
+		<table class="table">
+		<tr>
+			<td class="text-right">
+			<a href="#" class="btn btn-sm btn-danger">예약</a>
+			<a href="#" class="btn btn-sm btn-success">찜하기</a>
+			<a href="main.jsp?mode=1&cno=<%=cno %>" class="btn btn-sm btn-primary">목록</a>
+			</td>
+		</tr>
+		</table>
+		<table class="table">
+		<tr>
+			<td class="text-right">
+			맛있다 (<%=vo.getGood() %>)&nbsp;괜찮다 (<%=vo.getSoso() %>)&nbsp;별로 (<%=vo.getBad() %>)
+			</td>
+		</tr>
+		</table>
+		
 		</div>
 	</div>
 
