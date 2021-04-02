@@ -9,9 +9,8 @@ import javax.sql.DataSource;
 import java.util.*;
 import java.sql.*;
 import com.sist.vo.*;
-
 public class MemberDAO {
-	 // 연결 객체
+	// 연결 객체
 	   private Connection conn;
 	   // SQL문장 전송 
 	   private PreparedStatement ps;
@@ -46,20 +45,22 @@ public class MemberDAO {
 		   return dao;
 			   
 	   }
-	   
-	   // 우편번호 검색
-	   public List<ZipcodeVO> postFindData(String dong) {
-		   List<ZipcodeVO> list = new ArrayList<ZipcodeVO>();
-		   try {
+	   // 우편번호
+	   public List<ZipcodeVO> postFindData(String dong)
+	   {
+		   List<ZipcodeVO> list=new ArrayList<ZipcodeVO>();
+		   try
+		   {
 			   getConnection();
-			   String sql = "SELECT zipcode, sido, gugun, dong, NVL(bunji,' ') "
-			   		+ "FROM zipcode "
-			   		+ "WHERE dong LIKE '%' ||?||'%'";
-			   ps = conn.prepareStatement(sql);
+			   String sql="SELECT zipcode,sido,gugun,dong,NVL(bunji,' ') "
+					     +"FROM zipcode "
+					     +"WHERE dong LIKE '%'||?||'%'";
+			   ps=conn.prepareStatement(sql);
 			   ps.setString(1, dong);
-			   ResultSet rs = ps.executeQuery();
-			   while(rs.next()) {
-				   ZipcodeVO vo = new ZipcodeVO();
+			   ResultSet rs=ps.executeQuery();
+			   while(rs.next())
+			   {
+				   ZipcodeVO vo=new ZipcodeVO();
 				   vo.setZipcode(rs.getString(1));
 				   vo.setSido(rs.getString(2));
 				   vo.setGugun(rs.getString(3));
@@ -68,65 +69,101 @@ public class MemberDAO {
 				   list.add(vo);
 			   }
 			   rs.close();
-		   }catch(Exception ex)	{
+		   }catch(Exception ex)
+		   {
 			   ex.printStackTrace();
-		   }finally {
+		   }
+		   finally
+		   {
 			   disConnection();
 		   }
-		   
-		   
 		   return list;
 	   }
 	   // 아이디 중복체크
-	   public int idcheck(String id) {
+	   public int idcheck(String id)
+	   {
 		   int count=0;
-		   try {
+		   try
+		   {
 			   getConnection();
-			   String sql = "SELECT COUNT(*) FROM project_member "
-			   				+ "WHERE id = ?";
-			   ps = conn.prepareStatement(sql);
+			   String sql="SELECT COUNT(*) FROM project_member "
+					     +"WHERE id=?";
+			   ps=conn.prepareStatement(sql);
 			   ps.setString(1, id);
-			   ResultSet rs = ps.executeQuery();
+			   ResultSet rs=ps.executeQuery();
 			   rs.next();
-			   count = rs.getInt(1);
+			   count=rs.getInt(1);
 			   rs.close();
-			   
-			   
-		   }catch(Exception ex) {
+		   }catch(Exception ex)
+		   {
 			   ex.printStackTrace();
-		   }finally {
+		   }
+		   finally
+		   {
 			   disConnection();
 		   }
-		   
 		   return count;
 	   }
 	   // 회원가입
-	   public void memberJoin(MemberVO vo) {
-		   try {
+	   public void memberJoin(MemberVO vo)
+	   {
+		   /*
+		    *  ID       NOT NULL VARCHAR2(20)  
+			PWD      NOT NULL VARCHAR2(10)  
+			NAME     NOT NULL VARCHAR2(34)  
+			SEX               VARCHAR2(10)  
+			BIRTHDAY NOT NULL VARCHAR2(20)  
+			EMAIL             VARCHAR2(100) 
+			POST     NOT NULL VARCHAR2(10)  
+			ADDR1    NOT NULL VARCHAR2(200) 
+			ADDR2             VARCHAR2(200) 
+			TEL               VARCHAR2(20)  
+			CONTENT           CLOB          
+			ADMIN             CHAR(1) 
+		    */
+		   try
+		   {
 			   getConnection();
-			   String sql = "INSERT INTO project_member VALUES(?,?,?,?,?,?,?,?,?,?,?,'n')";
-			   ps = conn.prepareStatement(sql);
-			   // ?에 값 채우기
+			   String sql="INSERT INTO project_member VALUES(?,?,?,?,?,?,?,?,?,?,?,'n')";
+			   ps=conn.prepareStatement(sql);
+			   //?에 값을 채운다 
 			   ps.setString(1, vo.getId());
 			   ps.setString(2, vo.getPwd());
 			   ps.setString(3, vo.getName());
 			   ps.setString(4, vo.getSex());
 			   ps.setString(5, vo.getBirthday());
+			   
 			   ps.setString(6, vo.getEmail());
 			   ps.setString(7, vo.getPost());
 			   ps.setString(8, vo.getAddr1());
 			   ps.setString(9, vo.getAddr2());
-			   ps.setString(10, vo.getContent());
-			   ps.setString(11, vo.getTel());
+			   ps.setString(10, vo.getTel());
+			   
+			   ps.setString(11, vo.getContent());
+			   
 			   ps.executeUpdate();
-		   }catch(Exception ex) {
+		   }catch(Exception ex) 
+		   {
 			   ex.printStackTrace();
-		   }finally {
+		   }
+		   finally
+		   {
 			   disConnection();
 		   }
 		   
 	   }
-	   // 회원수정
+	   // 회원수정 
 	   // 아이디 찾기
-	   // 비밀번호 찾기
+	   // 비밀번호 찾기 
 }
+
+
+
+
+
+
+
+
+
+
+
