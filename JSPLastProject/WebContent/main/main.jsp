@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="../css/layout.css" rel="stylesheet" type="text/css" media="all">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<style type="text/css">
+<link rel="stylesheet" href="../shadow/css/shadowbox.css">
+<!-- <style type="text/css">
 .search-container {
   overflow: hidden !important;
   float: right !important;
@@ -76,7 +77,45 @@ input:focus {
   border: 0 !important !important;
   text-shadow: 0 0 0 !important;
 }
-</style>
+</style> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<script type="text/javascript">
+Shadowbox.init({
+	players:["iframe"]
+});
+$(function(){
+	$('#login').click(function(){
+		Shadowbox.open({
+			content:'../member/login.jsp',
+			player:'iframe',
+			title:'로그인',
+			width:340,
+			height:200
+		})
+	})
+});
+$(function(){
+	$('#postBtn').click(function(){
+		Shadowbox.open({
+			content:'../member/postfind.jsp',
+			player:'iframe',
+			title:'우편번호검색',
+			width:540,
+			height:450
+		})
+	})
+	$('#checkBtn').click(function(){
+		Shadowbox.open({
+			content:'../member/idcheck.jsp', // include
+			player:'iframe',
+			title:'아이디 중복체크',
+			width:340,
+			height:200
+		})
+	})
+});
+</script>
 </head>
 <body id="top">
 <!-- ################################################################################################ --> 
@@ -112,9 +151,10 @@ input:focus {
     <!-- ################################################################################################ -->
     <ul class="clear">
       <li class="active"><a href="../main/main.do">Home</a></li>
+      <li><a href="#" id="login">로그인</a></li>
       <li><a class="drop" href="#">회원가입</a>
         <ul>
-          <li><a href="pages/gallery.html">회원가입</a></li>
+          <li><a href="../member/join.do">회원가입</a></li>
           <li><a href="pages/full-width.html">아이디찾기</a></li>
           <li><a href="pages/sidebar-left.html">비밀번호찾기</a></li>
         </ul>
@@ -164,6 +204,7 @@ input:focus {
   
 </div>
 
+
 <!-- 내용이 들어가는 위치 -->
    <jsp:include page="${main_jsp }"></jsp:include>
 <!-- ################################################################################################ --> 
@@ -203,6 +244,6 @@ input:focus {
 <script src="../js/jquery.backtotop.js"></script> 
 <script src="../js/jquery.mobilemenu.js"></script> 
 <script src="../js/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db0485ed4f0d0ece879a4510ed7f48e6&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf8b694af5fe5a15b76f628730556e5d&libraries=services"></script>
 </body>
 </html>
