@@ -86,7 +86,7 @@ input:focus {
   <header id="header" class="clear"> 
     <!-- ################################################################################################ -->
     <div id="logo" class="fl_left">
-      <h1><a href="index.html">맛집 & 레시피</a></h1>
+      <h1><a href="../main/main.do">맛집 & 레시피</a></h1>
     </div>
     <div class="fl_right">
       <!-- <ul class="inline">
@@ -111,7 +111,7 @@ input:focus {
   <nav id="mainav" class="clear"> 
     <!-- ################################################################################################ -->
     <ul class="clear">
-      <li class="active"><a href="index.html">Home</a></li>
+      <li class="active"><a href="../main/main.do">Home</a></li>
       <li><a class="drop" href="#">회원가입</a>
         <ul>
           <li><a href="pages/gallery.html">회원가입</a></li>
@@ -135,7 +135,7 @@ input:focus {
       </li>
       <li><a class="drop" href="#">레시피</a>
         <ul>
-          <li><a href="#">레시피</a></li>
+          <li><a href="../recipe/recipe_list.do">레시피</a></li>
           <li><a href="#">쉐프</a></li>
           <li><a href="#">오늘의 레시피</a></li>
           <li><a href="#">오늘의 쉐프</a></li>
@@ -165,7 +165,7 @@ input:focus {
 </div>
 
 <!-- 내용이 들어가는 위치 -->
-   <jsp:include page="home.jsp"></jsp:include>
+   <jsp:include page="${main_jsp }"></jsp:include>
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ --> 
 <!-- ################################################################################################ -->
@@ -203,5 +203,6 @@ input:focus {
 <script src="../js/jquery.backtotop.js"></script> 
 <script src="../js/jquery.mobilemenu.js"></script> 
 <script src="../js/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db0485ed4f0d0ece879a4510ed7f48e6&libraries=services"></script>
 </body>
 </html>
