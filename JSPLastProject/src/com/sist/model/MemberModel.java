@@ -2,10 +2,12 @@ package com.sist.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
@@ -100,8 +102,41 @@ public class MemberModel {
 	  // DAO전송
 	  MemberDAO dao=MemberDAO.newInstance();
 	  dao.memberJoin(vo);
-	  return "redirect:../main/main.do";     // main.do에 있는 값을 읽고 다시 출력
+	  return "redirect:../main/main.do";
 	  //return "../main/main.jsp";
+  }
+  @RequestMapping("member/login.do")
+  public String member_login(HttpServletRequest request,HttpServletResponse response)
+  {
+	  // id,pwd
+	  String id=request.getParameter("id");
+	  String pwd=request.getParameter("pwd");
+	  // id와 pwd가 오라클에 존재하는 확인 
+	  MemberDAO dao=MemberDAO.newInstance();
+	  String result=dao.isLogin(id, pwd);
+	  if(!(result.equals("NOID")||result.equals("NOPWD")))
+	  {
+		  StringTokenizer st=new StringTokenizer(result,"|");
+		  String name=st.nextToken();
+		  String admin=st.nextToken();
+		  result="OK";
+		  // session에 저장 
+		  HttpSession session=request.getSession();
+		  session.setAttribute("id", id);
+		  session.setAttribute("name", name);
+		  session.setAttribute("admin", admin);
+	  }
+	  request.setAttribute("result", result); // NOID,NOPWD,OK
+	  return "../member/login_ok.jsp";
+  }
+  
+  @RequestMapping("member/logout.do")
+  // 로그아웃 
+  public String memberLogout(HttpServletRequest request,HttpServletResponse response)
+  {
+	  HttpSession session=request.getSession();
+	  session.invalidate(); // 저장된 내용을 전체 해제
+	  return "redirect:../main/main.do";
   }
   
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,6 +80,7 @@ input:focus {
 }
 </style> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <script type="text/javascript">
 Shadowbox.init({
@@ -94,28 +96,39 @@ $(function(){
 			height:200
 		})
 	})
-});
-$(function(){
 	$('#postBtn').click(function(){
-		Shadowbox.open({
+		/*Shadowbox.open({
 			content:'../member/postfind.jsp',
 			player:'iframe',
 			title:'우편번호검색',
 			width:540,
 			height:450
-		})
+		})*/
+		new daum.Postcode({
+			oncomplete:function(data)
+			{
+				$('#post').val(data.zonecode);
+				$('#addr1').val(data.address);
+			}
+		}).open();
 	})
 	$('#checkBtn').click(function(){
 		Shadowbox.open({
-			content:'../member/idcheck.jsp', // include
+			content:'../member/idcheck.jsp',
 			player:'iframe',
-			title:'아이디 중복체크',
+			title:'아이디중복체크',
 			width:340,
 			height:200
 		})
 	})
 });
 </script>
+<style type="text/css">
+.food_row{
+   width:960px;
+   margin: 0px auto;
+}
+</style>
 </head>
 <body id="top">
 <!-- ################################################################################################ --> 
@@ -151,42 +164,53 @@ $(function(){
     <!-- ################################################################################################ -->
     <ul class="clear">
       <li class="active"><a href="../main/main.do">Home</a></li>
-      <li><a href="#" id="login">로그인</a></li>
-      <li><a class="drop" href="#">회원가입</a>
-        <ul>
-          <li><a href="../member/join.do">회원가입</a></li>
-          <li><a href="pages/full-width.html">아이디찾기</a></li>
-          <li><a href="pages/sidebar-left.html">비밀번호찾기</a></li>
-        </ul>
-      </li>
-      <!--<li><a class="drop" href="#">회원수정</a>
-        <ul>
-          <li><a href="pages/gallery.html">회원수정</a></li>
-          <li><a href="pages/full-width.html">비밀번호변경</a></li>
-          <li><a href="pages/sidebar-left.html">회원탈퇴</a></li>
-        </ul>
-      </li>-->
+      
+      <c:if test="${sessionScope.id==null }">
+        <li><a href="#" id="login">로그인</a></li>
+      </c:if>
+      <c:if test="${sessionScope.id!=null }">
+        <li><a href="../member/logout.do">로그아웃</a></li>
+      </c:if>
+      
+      
+      <c:if test="${sessionScope.id==null }">
+	      <li><a class="drop" href="#">회원가입</a>
+	        <ul>
+	          <li><a href="../member/join.do">회원가입</a></li>
+	          <li><a href="pages/full-width.html">아이디찾기</a></li>
+	          <li><a href="pages/sidebar-left.html">비밀번호찾기</a></li>
+	        </ul>
+	      </li>
+      </c:if>
+      <c:if test="${sessionScope.id!=null }">
+	      <li><a class="drop" href="#">회원수정</a>
+	        <ul>
+	          <li><a href="pages/gallery.html">회원수정</a></li>
+	          <li><a href="pages/full-width.html">비밀번호변경</a></li>
+	          <li><a href="pages/sidebar-left.html">회원탈퇴</a></li>
+	        </ul>
+	      </li>
+      </c:if>
       <li><a class="drop" href="#">맛집</a>
         <ul>
-          <li><a href="#">지역별맛집</a></li>
-          <li><a href="#">맛집추천</a></li>
-          <li><a href="#">맛집예약</a></li>
+          <li><a href="../food/location.do">지역별맛집</a></li>
+          <c:if test="${sessionScope.id!=null }">
+	          <li><a href="../recommand/recommand.do">맛집추천</a></li>
+	          <li><a href="../food/reserve.do">맛집예약</a></li>
+          </c:if>
         </ul>
       </li>
       <li><a class="drop" href="#">레시피</a>
         <ul>
           <li><a href="../recipe/recipe_list.do">레시피</a></li>
-          <li><a href="#">쉐프</a></li>
-          <li><a href="#">오늘의 레시피</a></li>
-          <li><a href="#">오늘의 쉐프</a></li>
-          <li><a href="#">인기 레시피</a></li>
+          <li><a href="../recipe/chef_list.do">쉐프</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">커뮤니티</a>
         <ul>
           <li><a href="#">자유게시판</a></li>
           <li><a href="#">묻고답하기</a></li>
-          <li><a href="#">후기게시판</a></li>
+          <li><a href="../databoard/list.do">자료실</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">뉴스</a>
@@ -196,15 +220,31 @@ $(function(){
           <li><a href="#">전체뉴스</a></li>
         </ul>
       </li>
-      <li><a href="#">마이페이지</a></li>
-      <!-- <li><a href="#">관리자페이지</a></li>-->
+       <c:if test="${sessionScope.id!=null }">
+         <c:if test="${sessionScope.admin=='n' }">
+          <li><a href="../food/mypage.do">마이페이지</a></li>
+         </c:if>
+         
+         <c:if test="${sessionScope.admin=='y' }">
+          <li><a href="../food/adminpage.do">관리자페이지</a></li>
+         </c:if>
+       </c:if>
     </ul>
     <!-- ################################################################################################ --> 
   </nav>
   
 </div>
-
-
+  <%--
+      ${sessionScope.id!=null } => session에 저장 (로그인 처리 완료)
+      session.setAttribute("id",id) : 저장
+      session.getAttribute("id") : 저장된 값 읽기
+      => EL => ${sessionScope.id}
+   --%>
+  <c:if test="${sessionScope.id!=null }">
+	<div class="wrapper food_row">
+	  <div class="text-right">${sessionScope.name}(${sessionScope.admin=='y'?"관리자":"일반사용자" })님 로그인중입니다</div>
+	</div>
+  </c:if>
 <!-- 내용이 들어가는 위치 -->
    <jsp:include page="${main_jsp }"></jsp:include>
 <!-- ################################################################################################ --> 
@@ -244,6 +284,6 @@ $(function(){
 <script src="../js/jquery.backtotop.js"></script> 
 <script src="../js/jquery.mobilemenu.js"></script> 
 <script src="../js/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf8b694af5fe5a15b76f628730556e5d&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db0485ed4f0d0ece879a4510ed7f48e6&libraries=services"></script>
 </body>
 </html>

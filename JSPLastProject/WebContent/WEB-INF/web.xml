@@ -6,11 +6,11 @@
     <servlet-class>com.sist.controller.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>C:\Users\User\git\JAVA_SIST\JSPLastProject\WebContent\WEB-INF\app.xml</param-value>
+      <param-value>C:\Users\User\git\2020-12-22-webStudy\JSPLastProject\WebContent\WEB-INF\app.xml</param-value>
     </init-param>
     <init-param>
       <param-name>file_path</param-name>
-      <param-value>C:\Users\User\git\JAVA_SIST\JSPLastProject\src\</param-value>
+      <param-value>C:\Users\User\git\2020-12-22-webStudy\JSPLastProject\src\</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

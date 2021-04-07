@@ -3,8 +3,11 @@ import java.util.*;
 import javax.sql.*;
 
 import com.sist.vo.FoodCategoryVO;
+import com.sist.vo.FoodJjimVO;
+import com.sist.vo.FoodReplyVO;
 import com.sist.vo.FoodVO;
 import com.sist.vo.RecipeVO;
+import com.sist.vo.ReserveVO;
 
 import java.sql.*;
 import javax.naming.*;
@@ -256,6 +259,448 @@ public class FoodDAO {
     			 vo.setTitle(rs.getString(3));
     			 vo.setChef(rs.getString(4));
     			 vo.setHit(rs.getString(5));
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
+     
+     // 댓글 읽기
+     public List<FoodReplyVO> foodReplyReadData(int cno)
+     {
+    	 List<FoodReplyVO> list=new ArrayList<FoodReplyVO>();
+    	 try
+    	 {
+    		 // 연결
+    		 getConnection();
+    		 String sql="SELECT no,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
+    				   +"FROM project_reply "
+    				   +"WHERE cno=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, cno);
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 FoodReplyVO vo=new FoodReplyVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setId(rs.getString(2));
+    			 vo.setName(rs.getString(3));
+    			 vo.setMsg(rs.getString(4));
+    			 vo.setDbday(rs.getString(5));
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
+     // 댓글 올리기
+     public void foodReplyInsert(FoodReplyVO vo)
+     {
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="INSERT INTO project_reply VALUES("
+    				   +"pr_no_seq.nextval,?,?,?,?,SYSDATE)";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, vo.getCno());
+    		 ps.setString(2, vo.getId());
+    		 ps.setString(3, vo.getName());
+    		 ps.setString(4, vo.getMsg());
+    		 
+    		 // 실행
+    		 ps.executeUpdate();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+     }
+     // 댓글 수정
+     public void foodReplyUpdate(FoodReplyVO vo)
+     {
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="UPDATE project_reply SET "
+    				   +"msg=? "
+    				   +"WHERE no=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setString(1, vo.getMsg());
+    		 ps.setInt(2, vo.getNo());
+    		 
+    		 ps.executeUpdate();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+     }
+     // 댓글 삭제
+     public void foodReplyDelete(int no)
+     {
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="DELETE FROM project_reply "
+    				   +"WHERE no=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, no);
+    		 ps.executeUpdate();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+     }
+     // 찜하기
+     public void foodJjimInsert(int no,String id)
+     {
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="INSERT INTO project_jjim VALUES("
+    				   +"pj_no_seq.nextval,?,?)";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(2, no);
+    		 ps.setString(1, id);
+    		 
+    		 ps.executeUpdate();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+     }
+     // 찜하기 체크
+     public int foodJjimCheck(int cno,String id)
+     {
+    	 int count=0;
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT COUNT(*) FROM project_jjim "
+    				   +"WHERE cno=? AND id=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, cno);
+    		 ps.setString(2, id);
+    		 ResultSet rs=ps.executeQuery();
+    		 rs.next();
+    		 count=rs.getInt(1);
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return count;
+     }
+     // 찜 목록 
+     public List<FoodJjimVO> foodJjimListData(String id)
+     {
+    	 List<FoodJjimVO> list=new ArrayList<FoodJjimVO>();
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT no,cno "
+    				   +"FROM project_jjim "
+    				   +"WHERE id=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setString(1, id);
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 FoodJjimVO vo=new FoodJjimVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setCno(rs.getInt(2));
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
+     public List<FoodVO> foodLocationFind(String gu)
+     {
+    	 List<FoodVO> list=new ArrayList<FoodVO>();
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT no,title,poster "
+    				   +"FROM food_house "
+    				   +"WHERE address LIKE '%'||?||'%'";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setString(1, gu);
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 FoodVO vo=new FoodVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setTitle(rs.getString(2));
+    			 vo.setPoster(rs.getString(3));
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
+     
+     public List<FoodVO> foodReserveAllData()
+     {
+    	 List<FoodVO> list=new ArrayList<FoodVO>();
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT no,title,poster,tel "
+    				   +"FROM food_house "
+    				   +"ORDER BY no ASC";
+    		 ps=conn.prepareStatement(sql);
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 FoodVO vo=new FoodVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setTitle(rs.getString(2));
+    			 String s=rs.getString(3);
+    			 s=s.substring(0,s.indexOf("^"));
+    			 vo.setPoster(s);
+    			 vo.setTel(rs.getString(4));
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex) 
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
+     
+     public String foodReserveDate(int no)
+     {
+    	 String rday="";
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT rdays FROM food_house "
+    				   +"WHERE no=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, no);
+    		 ResultSet rs=ps.executeQuery();
+    		 rs.next();
+    		 rday=rs.getString(1);
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return rday;
+     }
+     
+     public String foodReserveTimeData(int day)
+     {
+    	 String time="";
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT tno FROM rday "
+    				   +"WHERE no=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, day);
+    		 ResultSet rs=ps.executeQuery();
+    		 rs.next();
+    		 time=rs.getString(1);
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return time;
+     }
+     
+     public String foodReserveGetTime(int no)
+     {
+    	 String time="";
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT time FROM rtime "
+    				   +"WHERE no=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, no);
+    		 ResultSet rs=ps.executeQuery();
+    		 rs.next();
+    		 time=rs.getString(1);
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return time;
+     }
+     
+     // 예약저장 
+     public void foodReserveSave(ReserveVO vo)
+     {
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="INSERT INTO project_reserve VALUES("
+    				   +"(SELECT NVL(MAX(no)+1,1) FROM project_reserve),?,?,?,?,?,"
+    				   +"0,SYSDATE)";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setString(1, vo.getId());
+    		 ps.setString(2, vo.getTitle());
+    		 ps.setString(3, vo.getDay());
+    		 ps.setString(4, vo.getTime());
+    		 ps.setString(5, vo.getInwon());
+    		 ps.executeUpdate();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+     }
+     public void reserve_ok(int no)
+     {
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="UPDATE project_reserve SET "
+    				   +"state=1 "
+    				   +"WHERE no=?";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setInt(1, no);
+    		 ps.executeUpdate();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+     }
+     
+     public List<ReserveVO> mypage_data(String id)
+     {
+    	 List<ReserveVO> list=new ArrayList<ReserveVO>();
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT no,title,day,time,inwon,state,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
+    				   +"FROM project_reserve "
+    				   +"WHERE id=? "
+    				   +"ORDER BY no DESC";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setString(1, id);
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 ReserveVO vo=new ReserveVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setTitle(rs.getString(2));
+    			 vo.setDay(rs.getString(3));
+    			 vo.setTime(rs.getString(4));
+    			 vo.setInwon(rs.getString(5));
+    			 vo.setState(rs.getInt(6));
+    			 vo.setDbday(rs.getString(7));
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
+     
+     public List<ReserveVO> adminpage_data()
+     {
+    	 List<ReserveVO> list=new ArrayList<ReserveVO>();
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT no,title,day,time,inwon,state,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS'),id "
+    				   +"FROM project_reserve "
+    				   +"ORDER BY no DESC";
+    		 ps=conn.prepareStatement(sql);
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 ReserveVO vo=new ReserveVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setTitle(rs.getString(2));
+    			 vo.setDay(rs.getString(3));
+    			 vo.setTime(rs.getString(4));
+    			 vo.setInwon(rs.getString(5));
+    			 vo.setState(rs.getInt(6));
+    			 vo.setDbday(rs.getString(7));
+    			 vo.setId(rs.getString(8));
     			 list.add(vo);
     		 }
     		 rs.close();

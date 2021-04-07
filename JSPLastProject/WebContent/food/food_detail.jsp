@@ -55,6 +55,36 @@
   max-width: 150px;
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let i=0;
+$(function(){
+	$('.delBtn').click(function(){
+		let no=$(this).attr("data-no");
+		let cno=$(this).attr("data-cno");
+		location.href="../food/food_reply_delete.do?no="+no+"&cno="+cno;
+	});
+	
+	$('.updateBtn').click(function(){
+		$('.updateli').hide();
+		$('.updateBtn').text("수정");
+		let no=$(this).attr("data-no");
+		if(i==0)
+		{
+			$(this).text("취소");
+			$('#m'+no).show("slow");
+			i=1;
+		}
+		else
+		{
+			$(this).text("수정");
+			$('#m'+no).hide("slow");
+			i=0;
+		}
+		
+	});
+});
+</script>
 </head>
 <body>
 <div class="wrapper row3">
@@ -130,77 +160,95 @@
          </td>
        </tr>
        </c:if>
+       <tr>
+         <td colspan="2" class="text-right">
+          <c:if test="${sessionScope.id!=null }">
+           <c:if test="${count==0 }">
+             <a href="../food/jjim.do?no=${vo.no }" class="btn btn-sm btn-primary">찜하기</a>
+           </c:if>
+           <c:if test="${count!=0 }">
+             <span class="btn btn-sm btn-active">찜하기</span>
+           </c:if>
+          </c:if>
+          <a href="../main/main.do" class="btn btn-sm btn-danger">목록</a>
+         </td>
+       </tr>
       </table>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['선호도', '댓글'],
+          ['좋아요',     <c:out value="${vo.good}"/>],
+          ['괜찮다',      <c:out value="${vo.soso}"/>],
+          ['별로',  <c:out value="${vo.bad}"/>]
+        ]);
+        var options = {
+          title: '댓글 분석',
+          is3D:true
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+      </script>
+      <div id="piechart"></div>
       <div id="comments">
-        <h2>Comments</h2>
+        <h2>댓글</h2>
         <ul>
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
-                <address>
-                By <a href="#">A Name</a>
-                </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
-              </header>
-              <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
-                <address>
-                By <a href="#">A Name</a>
-                </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
-              </header>
-              <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="../images/demo/avatar.png" alt=""></figure>
-                <address>
-                By <a href="#">A Name</a>
-                </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
-              </header>
-              <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
-              </div>
-            </article>
-          </li>
+          
+          <c:forEach var="rvo" items="${rList }">
+	          <li>
+	            <article>
+	              <header>
+	                <figure class="avatar">
+	                 <c:if test="${sessionScope.id==rvo.id }">
+	                  <span class="btn btn-xs btn-success updateBtn" data-no="${rvo.no }">수정</span>
+	                  <span class="btn btn-xs btn-danger delBtn" data-no="${rvo.no }" data-cno="${vo.no }">삭제</span>
+	                 </c:if>
+	                </figure>
+	                <address>
+	                By <a href="#">${rvo.name }</a>
+	                </address>
+	                <time datetime="2045-04-06T08:15+00:00">${rvo.dbday }</time>
+	              </header>
+	              <div class="comcont">
+	                <pre style="white-space: pre-wrap;border:none;background-color:white;">${rvo.msg }</pre>
+	              </div>
+	            </article>
+	          </li>
+	          <li style="display:none" id="m${rvo.no }" class="updateli">
+	            <form action="../food/food_reply_update.do" method="post">
+		          <table class="table">
+		            <tr>
+		             <td>
+		              <textarea rows="7" cols="30" name="msg">${rvo.msg }</textarea>
+		              <input type="hidden" name=cno value="${vo.no }">
+		              <input type="hidden" name=no value="${rvo.no }">
+		              <input type="submit" value="댓글수정" class="btn btn-sm btn-danger">
+		             </td>
+		            </tr>
+		          </table>
+		        </form>
+	          </li>
+          </c:forEach>
         </ul>
-        <h2>Write A Comment</h2>
-        <form action="#" method="post">
-          <div class="one_third first">
-            <label for="name">Name <span>*</span></label>
-            <input type="text" name="name" id="name" value="" size="22">
-          </div>
-          <div class="one_third">
-            <label for="email">Mail <span>*</span></label>
-            <input type="text" name="email" id="email" value="" size="22">
-          </div>
-          <div class="one_third">
-            <label for="url">Website</label>
-            <input type="text" name="url" id="url" value="" size="22">
-          </div>
-          <div class="block clear">
-            <label for="comment">Your Comment</label>
-            <textarea name="comment" id="comment" cols="25" rows="10"></textarea>
-          </div>
-          <div>
-            <input name="submit" type="submit" value="Submit Form">
-            &nbsp;
-            <input name="reset" type="reset" value="Reset Form">
-          </div>
-        </form>
+        
+        <c:if test="${sessionScope.id!=null }">
+	        <form action="../food/food_reply_insert.do" method="post">
+	          <table class="table">
+	            <tr>
+	             <td>
+	              <textarea rows="7" cols="30" name="msg"></textarea>
+	              <input type="hidden" name=cno value="${vo.no }">
+	              <input type="submit" value="댓글쓰기" class="btn btn-sm btn-danger">
+	             </td>
+	            </tr>
+	          </table>
+	        </form>
+        </c:if>
       </div>
       <!-- ################################################################################################ --> 
     </div>
@@ -208,7 +256,7 @@
     <!-- ################################################################################################ -->
     <div class="sidebar two_quarter"> 
       <div id="map" style="width:100%;height:350px;"></div>
-      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf8b694af5fe5a15b76f628730556e5d&libraries=services"></script>
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=db0485ed4f0d0ece879a4510ed7f48e6&libraries=services"></script>
       <script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {

@@ -15,12 +15,17 @@ import lombok.Setter;
 	ADDR2             VARCHAR2(200) 
 	TEL               VARCHAR2(20)  
 	CONTENT           CLOB          
-	ADMIN             CHAR(1)  
- * 
+	ADMIN             CHAR(1)   
  */
 @Getter
 @Setter
 public class MemberVO {
-	private String id, pwd, name, sex, birthday, email, post, addr1, addr2, tel, content, admin;
-	
+  private String id,pwd,name,sex,birthday,email,post,addr1,addr2,tel,content,admin;
 }
+
+
+
+
+
+
+

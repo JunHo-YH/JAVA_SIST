@@ -7,6 +7,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.sist.vo.ChefVO;
+import com.sist.vo.RecipeMakeVO;
 import com.sist.vo.RecipeVO;
 
 import java.sql.*;
@@ -71,7 +73,7 @@ public class RecipeDAO {
 			   String sql="SELECT no,poster,title,chef,hit,num "
 					     +"FROM (SELECT no,poster,title,chef,hit,rownum as num "
 					     +"FROM (SELECT no,poster,title,chef,hit "
-					     +"FROM craw ORDER BY no ASC)) "
+					     +"FROM recipe ORDER BY no ASC)) "
 					     +"WHERE num BETWEEN ? AND ?";
 			   ps=conn.prepareStatement(sql);
 			   int rowSize=12;
@@ -108,7 +110,7 @@ public class RecipeDAO {
 		   try
 		   {
 			   getConnection();
-			   String sql="SELECT COUNT(*) FROM craw";
+			   String sql="SELECT COUNT(*) FROM recipe";
 			   ps=conn.prepareStatement(sql);
 			   ResultSet rs=ps.executeQuery();
 			   rs.next();
@@ -123,6 +125,188 @@ public class RecipeDAO {
 			   disConnection();
 		   }
 		   return count;
+	   }
+	   // chef
+	   public List<ChefVO> chefListData(int page)
+	   {
+		   List<ChefVO> list=new ArrayList<ChefVO>();
+		   try
+		   {
+			   getConnection();
+			   String sql="SELECT chef_name,poster,mc1,mc2,mc3,mc7,num "
+					     +"FROM (SELECT chef_name,poster,mc1,mc2,mc3,mc7,rownum as num "
+					     +"FROM (SELECT chef_name,poster,mc1,mc2,mc3,mc7 "
+					     +"FROM chef)) "
+					     +"WHERE num BETWEEN ? AND ?";
+			   int rowSize=30;
+			   int start=(rowSize*page)-(rowSize-1);
+			   int end=rowSize*page;
+			   ps=conn.prepareStatement(sql);
+			   ps.setInt(1, start);
+			   ps.setInt(2, end);
+			   
+			   ResultSet rs=ps.executeQuery();
+			   while(rs.next())
+			   {
+				   ChefVO vo=new ChefVO();
+				   vo.setChef_name(rs.getString(1));
+				   vo.setPoster(rs.getString(2));
+				   vo.setMc1(rs.getString(3));
+				   vo.setMc2(rs.getString(4));
+				   vo.setMc3(rs.getString(5));
+				   vo.setMc7(rs.getString(6));
+				   
+				   list.add(vo);
+			   }
+			   rs.close();
+			   
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   disConnection();
+		   }
+		   return list;
+	   }
+	   public int chefTotalPage()
+	   {
+		   int total=0;
+		   try
+		   {
+			   getConnection();
+			   String sql="SELECT CEIL(COUNT(*)/30) FROM chef";
+			   ps=conn.prepareStatement(sql);
+			   ResultSet rs=ps.executeQuery();
+			   rs.next();
+			   total=rs.getInt(1);
+			   rs.close();
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   disConnection();
+		   }
+		   return total;
+	   }
+	   // make
+	   /*
+	    *   NO          NOT NULL NUMBER         
+			RNO                  NUMBER         
+			POSTER      NOT NULL VARCHAR2(260)  
+			CHEF        NOT NULL VARCHAR2(200)  
+			CHEF_POSTER NOT NULL VARCHAR2(260)  
+			TITLE       NOT NULL VARCHAR2(2000) 
+			CONTENT     NOT NULL VARCHAR2(4000) 
+			INFO1       NOT NULL VARCHAR2(20)   
+			INFO2       NOT NULL VARCHAR2(20)   
+			INFO3       NOT NULL VARCHAR2(20)   
+			FOOD_MAKE   NOT NULL CLOB           
+			CHEF_INFO   NOT NULL VARCHAR2(1000)
+	    */
+	   public RecipeMakeVO recipeMakeData(int no)
+	   {
+		   RecipeMakeVO vo=new RecipeMakeVO();
+		   try
+		   {
+			   getConnection();
+			   String sql="SELECT poster,chef,chef_poster,title,"
+					     +"content,info1,info2,info3,food_make,chef_info "
+					     +"FROM recipe_make "
+					     +"WHERE rno=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setInt(1, no);
+			   ResultSet rs=ps.executeQuery();
+			   rs.next();
+			   vo.setPoster(rs.getString(1));
+			   vo.setChef(rs.getString(2));
+			   vo.setChef_poster(rs.getString(3));
+			   vo.setTitle(rs.getString(4));
+			   vo.setContent(rs.getString(5));
+			   vo.setInfo1(rs.getString(6));
+			   vo.setInfo2(rs.getString(7));
+			   vo.setInfo3(rs.getString(8));
+			   vo.setFood_make(rs.getString(9));
+			   vo.setChef_info(rs.getString(10));
+			   rs.close();
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   disConnection();
+		   }
+		   return vo;
+	   }
+	   
+	   public List<RecipeVO> recipeChefMakeData(String chef,int page)
+	   {
+		   List<RecipeVO> list=new ArrayList<RecipeVO>();
+		   try
+		   {
+			   getConnection();
+			   String sql="SELECT no,poster,title,chef,hit,num "
+					     +"FROM (SELECT no,poster,title,chef,hit,rownum as num "
+					     +"FROM (SELECT no,poster,title,chef,hit "
+					     +"FROM recipe WHERE chef=? ORDER BY no ASC)) "
+					     +"WHERE num BETWEEN ? AND ?";
+			   ps=conn.prepareStatement(sql);
+			   int rowSize=12;
+			   int start=(rowSize*page)-(rowSize-1);
+			   int end=rowSize*page;
+			   ps.setString(1, chef);
+			   ps.setInt(2, start);
+			   ps.setInt(3, end);
+			   ResultSet rs=ps.executeQuery();
+			   while(rs.next())
+			   {
+				   RecipeVO vo=new RecipeVO();
+				   vo.setNo(rs.getInt(1));
+				   vo.setPoster(rs.getString(2));
+				   vo.setTitle(rs.getString(3));
+				   vo.setChef(rs.getString(4));
+				   vo.setHit(rs.getString(5));
+				   list.add(vo);
+			   }
+			   rs.close();
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   disConnection();
+		   }
+		   return list;
+	   }
+	   public int recipeChefMakePage(String chef)
+	   {
+		   int total=0;
+		   try
+		   {
+			   getConnection();
+			   String sql="SELECT CEIL(COUNT(*)/12.0) "
+					     +"FROM recipe "
+					     +"WHERE chef=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, chef);
+			   ResultSet rs=ps.executeQuery();
+			   rs.next();
+			   total=rs.getInt(1);
+			   rs.close();
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   disConnection();
+		   }
+		   return total;
 	   }
 	   
 	   

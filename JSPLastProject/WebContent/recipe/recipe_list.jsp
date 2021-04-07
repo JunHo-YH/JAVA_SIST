@@ -34,15 +34,12 @@
         <figure>
           <header class="heading">총 <span style="color:green;font-weight: bold;"><fmt:formatNumber value="${count }" pattern="000,000"/></span>개의 맛있는 레시피가 있습니다.</header>
           <ul class="nospace clear">
-          <%--
-               for(RecipeVO vo:rList)
-           --%>
           <c:forEach var="vo" items="${rList }" varStatus="s">
             <c:if test="${s.index%4==0 }">
-             <li class="one_quarter first"><a href="#"><img src="${vo.poster }" title="${vo.title }" class="img-rounded"></a></li>
+             <li class="one_quarter first"><a href="../recipe/recipe_make.do?no=${vo.no }"><img src="${vo.poster }" title="${vo.title }" class="img-rounded"></a></li>
             </c:if>
             <c:if test="${s.index%4!=0 }">
-             <li class="one_quarter"><a href="#"><img src="${vo.poster }" title="${vo.title }" class="img-rounded"></a></li>
+             <li class="one_quarter"><a href="../recipe/recipe_make.do?no=${vo.no }"><img src="${vo.poster }" title="${vo.title }" class="img-rounded"></a></li>
             </c:if>
           </c:forEach>
           </ul>
