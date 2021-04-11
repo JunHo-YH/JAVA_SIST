@@ -208,8 +208,8 @@ $(function(){
       </li>
       <li><a class="drop" href="#">커뮤니티</a>
         <ul>
-          <li><a href="#">자유게시판</a></li>
-          <li><a href="#">묻고답하기</a></li>
+          <li><a href="../boardreply/list.do">자유게시판</a></li>
+          <li><a href="../boardreply/list.do">묻고답하기</a></li>
           <li><a href="../databoard/list.do">자료실</a></li>
         </ul>
       </li>

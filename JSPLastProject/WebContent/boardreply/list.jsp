@@ -15,12 +15,12 @@
 </head>
 <body>
 	<div class="wrapper row3 mypage_row">
-	  <h2 class="sectiontitle">자료실</h2>
+	  <h2 class="sectiontitle">묻고 답하기</h2>
 	  <div style="height: 500px;width:750px;overflow-y:auto;margin:0px auto">
 	   <table class="table">
 	     <tr>
 	      <td>
-	       <a href="../databoard/insert.do" class="btn btn-sm btn-danger">등록</a>
+	       <a href="../boardreply/insert.do" class="btn btn-sm btn-danger">등록</a>
 	      </td>
 	     </tr>
 	   </table>
@@ -36,7 +36,7 @@
 	       <tr>
 		      <td class="text-center" width=10%>${vo.no }</td>
 		      <td class="text-left" width=45%>
-		        <a href="../databoard/detail.do?no=${vo.no }">${vo.subject }</a>
+		        <a href="../boardreply/detail.do?no=${vo.no }">${vo.subject }</a>
 		      </td>
 		      <td class="text-center" width=15%>${vo.name }</td>
 		      <td class="text-center" width=20%>${vo.regdate }</td>
@@ -50,7 +50,6 @@
 	        <a href="#" class="btn btn-sm btn-success">이전</a>
 	          ${curpage } page / ${ totalpage} pages
 	        <a href="#" class="btn btn-sm btn-info">다음</a>
-<!-- 	        CLONE ING -->
 	      </td>
 	     </tr>
 	   </table>
