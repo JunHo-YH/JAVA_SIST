@@ -18,6 +18,8 @@
 	  /main.do
 	  /main.html => 직접 처리
 	  
+	  ========================여기까지
+	  
 	  1. URL => 웹에서는 반드시 마지막에 파일명을 전송
 	     /main.do => 서블릿을 찾아라(DispatcherServlet)
 	     
@@ -158,6 +160,8 @@
 						==> setAttribute(String, Object)
 						
 			======================================================== MODEL 1방식 JSPBasicProject 시리즈 보기
+			
+			
 			
 						
 			
