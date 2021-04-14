@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PreparedStatement, ResultSet -->
+<!-- 테이블당 하나씩 만들어야한다 -->
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- 
+ 	XML: namespace
+ 	JAVA: package
+ 	
+ 	SELECT CEIL(MAX(no)/10.0) FROM board
+ 	resultType="int"
+ 	SELECT pwd FROM board
+ 	resultType="String"       => 값이 1개면 일반 데이터형으로 받고
+ 							  => 값이 2개 이상이면 vo로 받는다.
+ 	=> Map: vo에 존재하지 않는 변수에 사용
+ 	
+  -->
+<mapper namespace="com.sist.main.emp-mapper">
+	<!-- SQL문장 --> <!-- resultType: 결과값을 받을 vo -->
+	<!-- 
+		public List<EmpVO> empAllData() 
+		{
+			return session.selectList
+		}
+		
+		공통모듈 (AOP)
+		
+			BEFORE
+			=============
+			메서드
+			=============
+			AFTER
+		
+		
+	 -->
+	 <sql id="select"> <!-- include: 반복이 많은 SQL문장일 경우 -->
+	 	SELECT * FROM emp
+	 </sql>
+	<select id="empAllData" resultType="EmpVO2">
+		
+		<include refid="select"></include>
+	</select>
+	
+	<!-- 
+		public EmpVO empDetailData(int empno) {
+		
+			return session.selectOne("id명칭", empno) => VO하나만
+						   selectList => VO를 list에 추가할 때
+		}
+	 -->
+	<select id="empDetailData" resultType="EmpVO2" parameterType="int">
+		<include refid="select"></include>
+		WHERE empno = #{empno}
+	</select>
+	
+	<!-- 
+		<select>: resultType(리턴형), parameterType(매개변수) => ?에 값을 채운다.
+		<insert>: parameterType
+		<update>: parameterType
+		<delete>: parameterType
+	 -->
+	
+	
+	
+</mapper>
