@@ -5,43 +5,55 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	
-	<!-- 
-		스프링에 등록하는 클래스
-		1) 사용자 정의 클래스 => 어노테이션 사용
-		2) 라이브러리 등록(어노테이션 사용이 불가능하다) => XML에 등록 => MyBatis, viewResolver, MultipartResolver
-	 -->
-	<!-- DataSource 등록 => getConnection, disConnection 준비완료-->
-	<!-- SqlSessionFactory 등록 
-		스프링에서 관리하는 클래스의 '주소값'을 받을 때 => Annotation
-				~ -ref대신 사용
-				@Autowired: 자동주입 => 클래스 타입이 같으면 오류가 발생할 수 있다.
-					<bean id="a" class="Sawon">
-					<bean id="b" class="Sawon">
-					
-				@Resource(name="a") => 중복된 클래스가 있을 때 사용
-				
-				
-				@Autowird
-				SqlSessionFactroy ssf => (O)
-				
-				SqlSessionFactory ssf = new SqlSessionFactory() => null
-				
-				
-		public class A {
-		
-			int a, b;
-		}
-		================
-		A aa = new A();
-		aa.a=10;
-		aa.b=20;
-		================ <bean id="aa" class="A" p:a="10" p:b="20" />
-		A cc = aa; ==>	<bean id="cc" class="A" p:aa-ref="aa" />
-		
-		A bb = new A(); ==> (X)
-	-->
-
-	
-
+    <!-- 
+                  스프링에 등록 클래스
+          1) 사용자 정의 클래스 => 어노테이션 사용
+          2) 라이브러리 등록 (어노테이션 사용이 불가능) => XML에 등록 => MyBatis , ViewResolver , MultipartResolver                                                      
+     -->
+     <!-- DataSource -->
+     <!-- SqlSessionFactory
+                   스프링에서 관리 클래스의 주소값을 받을 때 => 어노테이션
+                   @Autowired
+                     <bean id="a" class="Sawon">
+                     <bean id="b" class="Sawon">
+                   @Resource(name="a")
+                   
+                   @Autowird
+                   SqlSessionFactory ssf
+                   
+                   SqlSessionFactory ssf=new SqlSessionFactory() => null
+                   
+           public class A
+           {
+               int a,b;
+           }
+           =============스프링
+           A aa=new A();
+           aa.a=10;
+           aa.b=20;
+           =============  <bean id="aa" class="A" p:a="10" p:b="20"> 
+           
+           A cc=aa;       <bean id="cc" class="A" p:aa-ref="aa">
+                          <bean id="dd" class="A" p:aa-ref="aa">
+                          <bean id="ee" class="A" p:aa-ref="aa">
+                          <bean id="ff" class="A" p:aa-ref="aa">
+           A dd=aa;
+           A ee=aa;
+           
+           A bb=new A(); 
+      -->
+      
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+

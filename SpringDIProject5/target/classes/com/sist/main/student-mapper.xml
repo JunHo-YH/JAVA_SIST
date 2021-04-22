@@ -2,63 +2,90 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
- <!-- Content Model : (cache-ref | cache | resultMap* | parameterMap* | sql* | insert* | update* | delete* | select*)+ -->
- <!-- +: 한 번 이상/ *: 0번 이상 / 아무표시 없는 것: 반드시 사용해야한다. -->
- <mapper namespace="com.sist.main.student-mapper">
-	<sql id="select">
-		SELECT name,kor,eng FROM spring_student
-	</sql>
-	<select id="studentAllData" resultType="StudentVO">
-	<include refid="select" />
-		<!-- 
-		
-			while(rs.next()) {
-			
-				StudentVO vo = new StudentVO();
-				vo.setName(rs.getString(1))
-				vo.setKor(rs.getInt(2))
-				
-				list.add(rs.getString(1)) ======>(X)
-			}
-			
-			SELECT COUNT(*) FROM spring_student => int
-			int a = selectOne()							=> 결과값이 1개면 일반 데이터형으로 받는다. / 2개 이상이면 VO OR Map(VO에 없는 변수를 받을 땐 Map)
-			SELECT name FROM spring_student => String
-		 -->
-	</select> <!-- 목록 -->
- 	<insert id="studentInsert" parameterType="StudentVO">
- 		INSERT INTO spring_student VALUES(#{name}, #{kor}, #{eng}, #{math})
- 		<!-- 
- 			#{name} ==> vo.getName() => VALUES(?,?,?,?)
- 		 -->
- 	</insert>
- 	<update id="studentUpdate" parameterType="StudentVO">
- 		UPDATE spring_student SET
- 		kor = #{kor}, eng = #{eng}, math = #{math}
- 		WHERE name = #{name}
- 	</update>
- 	
- 	<delete id="studentDelete" parameterType="String">
- 		DELETE FROM spring_student WHERE name = #{name}
- 	</delete>
- 	<select id="studentFindData" resultType="StudentVO" parameterType="String">
-		<include refid="select" />
-		WHERE name LIKE '%" || #{name} || '%'
- 	</select><!-- 찾기 -->
- 	
- 	<select id="studentDetailData" resultType="StudentVO" parameterType="String">
- 		<include refid="select" />
-		WHERE name LIKE = #{name}
- 	</select><!-- 상세보기 -->
- 	
- 	<select id="movieListData" resultType="MovieVO" parameterType="hashmap"> <!-- int가 2개이므로 vo, map둘 중 하나 => vo에 start, end라는 변수가 없기 때문에 map! -->
- 		SELECT no, title, poster, num
- 		FROM (SELECT no, title, poster, rownum as num
- 		FROM (SELECT no, title, poster
- 		FROM daum_movie))
- 		WHERE num BETWEEN #{start} AND #{end}
- 		
- 	
- 	</select>
- </mapper>
+<mapper namespace="com.sist.main.student-mapper">
+  <!-- 
+       (cache-ref | cache | resultMap* | parameterMap* | sql* | insert* | update* | delete* | select*)+
+   -->
+   <sql id="select">
+    SELECT name,kor,eng as emg,math FROM spring_student
+   </sql>
+   <select id="studentAllData" resultType="StudentVO">
+     <include refid="select"/>
+     <!-- 
+           while(rs.next())
+           {
+               StudentVO vo=new StudentVO();
+               vo.setName(rs.getString(1))
+               vo.setKor(rs.getInt(2);
+               list.add(rs.getString(1))
+               list.add(rs.getInt(2)
+           }
+           
+           SELECT COUNT(*) FROM spring_student => int
+           int a=selectOne()
+           SELECT name FROM spring_student String
+           
+           SELECT COUNT(*),MAX(kor) FROM spring_student => Map
+      -->
+   </select><!-- 목록 -->
+   <insert id="studentInsert" parameterType="StudentVO"><!-- ${vo.getId()} -->
+     INSERT INTO spring_student VALUES(#{name},#{kor},#{emg},#{math})
+     <!-- 
+           #{name} == vo.getName() => VALUES(?,?,?,?)
+      -->
+   </insert>
+   <update id="studentUpdate" parameterType="StudentVO">
+     UPDATE spring_student SET
+     kor=#{kor},math=#{math},eng=#{emg}
+     WHERE name=#{name}
+   </update>
+   <!-- 
+          public void sDelete(String name)
+          {
+             
+          }
+    -->
+   <delete id="studentDelete" parameterType="String">
+     DELETE FROM spring_student WHERE name=#{name}
+   </delete>
+   <select id="studentFindData" resultType="StudentVO" parameterType="String">
+     <include refid="select"></include>
+     WHERE name LIKE '%'||#{name}||'%'
+   </select><!-- 찾기 -->
+   <select id="studentDetailData" resultType="StudentVO" parameterType="String">
+      <include refid="select"></include>
+      WHERE name=#{name}
+   </select><!-- 상세 -->
+   <!-- <select id="movieListData" resultType="MovieVO" parameterType="hashmap">
+     SELECT no,title,poster,num
+     FROM (SELECT no,title,poster,rownum as num 
+     FROM (SELECT no,title,poster
+     FROM daum_movie))
+     WHERE num BTEWEEN #{start} AND #{end}
+   </select> -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

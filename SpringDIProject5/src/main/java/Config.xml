@@ -2,19 +2,15 @@
 <!DOCTYPE configuration
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
- 
- <configuration>
-<!-- 물음표(?)는 써도 되고, 안 써도된다는 의미 // 이 순서를 따라야한다.
-Content Model : (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, 
- reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
- --> 
- 	<typeAliases>
- 		<typeAlias type="com.sist.main.StudentVO" alias="StudentVO"/>
- 	
- 	</typeAliases>
- 	
- 	<mappers>
- 		<mapper resource="com/sist/main/student-mapper.xml"/>
- 	</mappers>
- 
- </configuration>
+<configuration>
+<!-- 
+     (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, 
+     reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
+ -->
+  <typeAliases>
+    <typeAlias type="com.sist.main.StudentVO" alias="StudentVO"/>
+  </typeAliases>
+  <mappers>
+    <mapper resource="com/sist/main/student-mapper.xml"/>
+  </mappers>
+</configuration>
