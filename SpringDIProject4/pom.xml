@@ -39,6 +39,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
 	    <!-- Jsoup -->
 	    <dependency>
 		    <groupId>org.jsoup</groupId>
@@ -69,7 +70,6 @@
 		    <version>5.1.5.RELEASE</version>
 		</dependency>
 		<!-- lombok -->
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
@@ -103,12 +103,9 @@
          <artifactId>spring-aspects</artifactId>
          <version>5.1.5.RELEASE</version>
       </dependency>
-      <!-- <dependency>
-         <groupId>com.oracle</groupId>
-         <artifactId>ojdbc14</artifactId>
-         <version>10.2.0.4.0</version>
-      </dependency> -->
-	<!--  시스템 Path 설정 -->
+      <!-- 시스템 Path 설정  
+          C:\springDev\study\SpringDIProject1
+      -->
       <dependency>
 		    <groupId>com.oracle</groupId>
 		    <artifactId>ojdbc14</artifactId>
@@ -116,7 +113,6 @@
 		    <scope>system</scope>
 		    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ojdbc14.jar</systemPath>
 		</dependency>
-      
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-jms</artifactId>
