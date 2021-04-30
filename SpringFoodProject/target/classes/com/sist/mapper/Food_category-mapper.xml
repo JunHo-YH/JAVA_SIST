@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- SQL문장(Statement, ResultSet) -->
+ <!-- 
+ 	namespace: 자바의 package
+ 	
+  -->
+ <mapper namespace="com.sist.mapper.food_category-mapper">
+ 	
+ 	<!-- 
+ 		한번만 파싱 => Map에 저장 => 일반 JDBC 
+ 				===========
+ 				map.put(id명, SELECT ~)
+ 	 -->
+ 	 <!--Config.xml에서 Alias로 FoodCategoryVO를 지정했기 때문에 resultType에 패키지명을 적어줄 필요가 없다. -->
+ 	<select id="foodCategoryListData" resultType="FoodCategoryVO" parameterType="int">
+ 		SELECT no, title, poster, subject
+ 		FROM food_category
+ 		WHERE no = #{no}
+ 	</select>
+ </mapper>
