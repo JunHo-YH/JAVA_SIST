@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+        MNO      NOT NULL NUMBER        
+		TITLE    NOT NULL VARCHAR2(500) #
+		POSTER   NOT NULL VARCHAR2(260) 
+		GENRE    NOT NULL VARCHAR2(300) #
+		DIRECTOR          VARCHAR2(200) 
+		ACTOR             VARCHAR2(500) #
+		STORY    NOT NULL CLOB          
+		KEY               VARCHAR2(50)
+ -->
+<mapper namespace="com.sist.dao.movie-mapper">
+  <select id="movieDetailData" resultType="MovieVO" parameterType="int">
+   SELECT title,poster,genre,director,actor,story
+   FROM naver_movie
+   WHERE mno=#{mno}
+  </select>
+  <sql id="movie-where">
+       <if test="type=='T'.toString()">
+        WHERE title LIKE '%'||#{ss}||'%'
+       </if>
+       <if test="type=='G'.toString()">
+        WHERE genre LIKE '%'||#{ss}||'%'
+       </if>
+       <if test="type=='A'.toString()">
+        WHERE actor LIKE '%'||#{ss}||'%'
+       </if>
+  </sql>
+  <select id="movieListData" resultType="MovieVO" parameterType="hashmap">
+    SELECT mno,title,poster,genre,actor,num
+    FROM (SELECT mno,title,poster,genre,actor,rownum as num 
+    FROM (SELECT /*+ INDEX_ASC(naver_movie NM_MNO_PK) */ mno,title,poster,genre,actor
+    FROM naver_movie
+       <if test="type=='T'.toString()">
+        WHERE title LIKE '%'||#{ss}||'%'
+       </if>
+       <if test="type=='G'.toString()">
+        WHERE genre LIKE '%'||#{ss}||'%'
+       </if>
+       <if test="type=='A'.toString()">
+        WHERE actor LIKE '%'||#{ss}||'%'
+       </if>
+    ))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="movieTotalPage" resultType="int" parameterType="hashmap">
+    SELECT CEIL(COUNT(*)/12.0) FROM naver_movie
+       <if test="type=='T'.toString()">
+        WHERE title LIKE '%'||#{ss}||'%'
+       </if>
+       <if test="type=='G'.toString()">
+        WHERE genre LIKE '%'||#{ss}||'%'
+       </if>
+       <if test="type=='A'.toString()">
+        WHERE actor LIKE '%'||#{ss}||'%'
+       </if>
+  </select>
+</mapper>
+
+
+
+

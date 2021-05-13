@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+    <aop:aspectj-autoproxy/><!-- Transaction,Log파일,빅데이터,AI -->
+    <!-- Proxy와 관련 : 대리자  -->
+    <!-- 
+          class A
+          {
+             public void display(){
+             }
+          }
+          
+          class Proxy{
+             A a=new A();
+             public Proxy(A a)
+             {
+                this.a=a;
+             }
+             public void display()
+             {
+                before처리
+                a.display();
+                after처리
+             }
+          }
+          
+          A a=new A();
+          a.display();
+          new Proxy(a).display();
+          
+          면접 : (70%) : OOP VS AOP
+     -->
+     <!-- 사용자 정의 : 클래스가 많다 (패키지별로 등록)-->
+     <context:component-scan base-package="com.sist.*"/>
+     <!-- JSP를 찾기 -->
+     <bean id="viewResolver"
+       class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+       p:prefix="/"
+       p:suffix=".jsp"
+     />
+     <!-- 
+        => Container : ApplicationContext,WebApplicationContext,AnnotationConfigApplicationContext
+        DL : 클래스를 찾아주는 역할 
+        DI : 필요한 데이터 ,객체주소 주입
+                        생성자 , setXxx
+      -->
+      <!-- 한글 변환 -->
+      <mvc:annotation-driven>
+	    <mvc:message-converters>
+	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	            <property name="supportedMediaTypes">
+	                <list>
+	                    <value>text/html;charset=UTF-8</value>
+	                </list>
+	            </property>
+	        </bean>
+	    </mvc:message-converters>
+   </mvc:annotation-driven>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

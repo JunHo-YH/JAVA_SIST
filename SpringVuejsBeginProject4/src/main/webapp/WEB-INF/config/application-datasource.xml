@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+    <!-- properties을 읽는다  -->
+    <!-- 
+       aop : aop를 설정 
+       beans : 클래스 등록 
+       p : setterDI 
+       c : constructor DI
+       mvc : 다른 언어 (javascript,코틀린) => 한글변환
+       tx : 트랜잭션 설정 
+       util : 파일읽기 
+       task : 스케쥴 => 데이터베이스 백업 
+     -->
+    <util:properties id="db" location="/WEB-INF/config/db.properties"/>
+    <!-- 오라클 정보를 모아서 마이바티스에 전송 준비 -->
+    <bean id="ds"
+       class="org.apache.commons.dbcp.BasicDataSource"
+       p:driverClassName="#{db['driver']}"
+       p:url="#{db['url']}"
+       p:username="#{db['username']}"
+       p:password="#{db['password']}"
+       p:maxActive="#{db['maxActive']}"
+       p:maxIdle="#{db['maxIdle']}"
+       p:maxWait="#{db['maxWait']}"
+     />
+     <bean id="ssf"
+       class="org.mybatis.spring.SqlSessionFactoryBean"
+       p:dataSource-ref="ds"
+       p:configLocation="/WEB-INF/config/Config.xml"
+     />
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
