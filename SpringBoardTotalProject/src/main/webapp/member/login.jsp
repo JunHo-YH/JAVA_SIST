@@ -17,30 +17,41 @@ h1 {
 </style>
 </head>
 <body>
-	<div style="height:50px"></div>
-	<div class="container">
-		<h1>Login</h1>
-		<div class="row">
-			<form method="post" action="../member/login_ok.do">
-				<table class="table">
-					<tr>
-						<th class="text-right" width="30%">ID</th>
-						<td width="70%"><input type="text" name=id size=15 class="input-sm"></td>
-					</tr>
-					<tr>
-						<th class="text-right" width="30%">PWD</th>
-						<td width="70%"><input type="password" name=pwd size=15 class="input-sm"></td>
-					</tr>
-					<tr>
-						<td class="text-center" colspan="2">
-							<button class="btn btn-sm btn-primary">로그인</button>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
-	
-	
+   <div style="height:50px"></div>
+   <div class="container">
+     <h1>Login</h1>
+     <div class="row">
+      <form method="post" action="../member/login_ok.do">
+       <table class="table">
+        <tr>
+         <th class="text-right" width="30%">ID</th>
+         <td width="70%"><input type=text name=id size=15 class="input-sm"></td>
+        </tr>
+        <tr>
+         <th class="text-right" width="30%">PW</th>
+         <td width="70%"><input type=password name=pwd size=15 class="input-sm"></td>
+        </tr>
+        <tr>
+          <td class="text-center" colspan="2">
+           <button class="btn btn-sm btn-primary">로그인</button>
+          </td>
+        </tr>
+       </table>
+      </form>
+     </div>
+   </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

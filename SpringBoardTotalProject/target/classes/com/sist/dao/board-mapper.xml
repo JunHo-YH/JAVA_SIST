@@ -1,27 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.dao.board-mapper">
-	<select id="boardListData" resultType="BoardVO" parameterMap="hashmap">
-		SELECT no,subject,name,redate as regdate,hit,num
-		FROM (SELECT no,subject,name,redate,hit,replyCount,rownum as num
-		FROM (SELECT /*+ INDEX_DESC(spring_freeboard sf_no_pk) */no,subject,name,regdate,hit
-		FROM spring_freeboard))
-		WHERE num BETWEEN #{start} AND #{end}
-	</select>
-	
-	<select id="boardTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*) / 10.0) FROM spring_freeboard
-	</select>
-	<!-- 
-		#{} => id => #{id} => 'admin'    WHERE id='admin' => #{}: 문자열, 날짜일때 사용
-	 	${} => ''을 생략 => WHERE id=''
-	 						   == 컬럼명이나 테이블명에는 ''이 없기 때문에 ${}를 사용한다.
-	 	
-	 	=> VO ==> #{name} => vo.getName()
-	 	=> Map ==> #{name} => map.get("name")
-	 
-	 
-	 -->
-	
-	
+ <select id="boardListData" resultType="BoardVO" parameterType="hashmap">
+   SELECT no,subject,name,redate as regdate,hit,num
+   FROM (SELECT no,subject,name,redate,hit,rownum as num 
+   FROM (SELECT /*+ INDEX_DESC(spring_freeboard sf_no_pk) */ no,subject,name,redate,hit
+   FROM spring_freeboard))
+   WHERE num BETWEEN #{start} AND #{end}
+ </select>
+ <select id="boardTotalPage" resultType="int">
+   SELECT CEIL(COUNT(*)/10.0) FROM spring_freeboard
+ </select>
+ <!-- 
+      #{} => id => #{id} => 'admin'  WHERE id='admin'  => #{} : 문자열 , 날짜 (숫자 제외)
+      ${} => ''을 생략  => WHERE id=''
+                              ==    WHERE 'id'=''
+                              
+      => VO  ==> #{name} => vo.getName()
+      => Map ==> #{name} => map.get("name")
+  -->
+  <!-- 글쓰기 
+       rs.getInt("no"); =>  인덱스 (컴럼명)
+  -->
+  <insert id="boardInsert" parameterType="BoardVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+     SELECT NVL(MAX(no)+1,1) as no FROM spring_freeboard
+    </selectKey>
+    INSERT INTO spring_freeboard VALUES(
+      #{no},
+      #{name},
+      #{subject},
+      #{content},
+      #{pwd},
+      SYSDATE,
+      0
+    )
+  </insert>
+  <!-- 상세보기 -->
+  <update id="boardHitIncrement" parameterType="int">
+   UPDATE spring_freeboard SET
+   hit=hit+1
+   WHERE no=#{no}
+  </update>
+  <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+   SELECT no,name,subject,content,redate as regdate,hit FROM spring_freeboard
+   WHERE no=#{no}
+  </select>
+  <!-- 찾기 -->
+  <sql id="dsql">
+   <trim prefix="(" suffix=")" prefixOverrides="OR">
+     <foreach collection="fsArr" item="fs">
+       <trim prefix="OR">
+        <choose>
+          <when test="fs=='N'.toString()">
+            name LIKE '%'||#{ss}||'%'
+          </when>
+          <when test="fs=='S'.toString()">
+            subject LIKE '%'||#{ss}||'%'
+          </when>
+          <when test="fs=='C'.toString()">
+            content LIKE '%'||#{ss}||'%'
+          </when>
+        </choose>
+       </trim>
+     </foreach>
+   </trim>
+  </sql>
+  <select id="boardFindData" resultType="BoardVO" parameterType="hashmap">
+   <bind name="pattern" value="'%'+ss+'%'"/>
+   SELECT no,subject,name,redate as regdate,hit,content 
+   FROM spring_freeboard
+   WHERE
+   <!-- WHERE ${fs} LIKE #{pattern}-->
+   <!-- 
+         fs=="name"
+         문자열 :
+            ==
+            equals
+    -->
+   <!-- <if test='fs.equals("name")'>
+     WHERE name LIKE '%'||#{ss}||'%'
+   </if>
+   <if test='fs.equals("subject")'>
+     WHERE subject LIKE '%'||#{ss}||'%'
+   </if>
+   <if test='fs.equals("content")'>
+     WHERE content LIKE '%'||#{ss}||'%'
+   </if> -->
+   <!-- <choose>
+    <when test='fs=="name"'>
+     WHERE name LIKE #{pattern}
+    </when>
+    <when test='fs=="subject"'>
+     WHERE subject LIKE #{pattern}
+    </when>
+    <when test='fs=="content"'>
+     WHERE content LIKE #{pattern}
+    </when>
+   </choose> -->
+   <!-- 
+         SC
+         OR (name LIKE '%'||#{ss}||'%') OR (content LIKE '%'||#{ss}||'%')
+         
+         S 
+         
+         N
+         (name LIKE '%'||#{ss}||'%')
+         NS
+         (name LIKE '%'||#{ss}||'%') OR (subject LIKE '%'||#{ss}||'%')
+         NSC
+         (name LIKE '%'||#{ss}||'%') OR (subject LIKE '%'||#{ss}||'%') OR(content LIKE '%'||#{ss}||'%')
+    -->
+   <include refid="dsql"/>
+  </select>
+  <select id="boardFindDataCount" resultType="int" parameterType="hashmap">
+   SELECT COUNT(*)
+   FROM spring_freeboard
+   WHERE
+   <!-- WHERE ${fs} LIKE '%'||#{ss}||'%'-->
+   <!-- 
+         fs=="name"
+         문자열 :
+            ==
+            equals
+    -->
+   <!-- <if test='fs.equals("name")'>
+     WHERE name LIKE '%'||#{ss}||'%'
+   </if>
+   <if test='fs.equals("subject")'>
+     WHERE subject LIKE '%'||#{ss}||'%'
+   </if>
+   <if test='fs.equals("content")'>
+     WHERE content LIKE '%'||#{ss}||'%'
+   </if> -->
+   <!-- <choose>
+    <when test='fs=="name"'>
+     WHERE name LIKE '%'||#{ss}||'%'
+    </when>
+    <when test='fs=="subject"'>
+     WHERE subject LIKE '%'||#{ss}||'%'
+    </when>
+    <when test='fs=="content"'>
+     WHERE content LIKE '%'||#{ss}||'%'
+    </when>
+   </choose> -->
+   <include refid="dsql"/>
+  </select>
+  <!-- 수정 -->
+  <select id="boardGetPassword" resultType="string" parameterType="int">
+   SELECT pwd FROM spring_freeboard
+   <!-- <trim prefix="WHERE">
+    no=#{no}
+   </trim> -->
+   WHERE no=#{no}
+  </select>
+  <update id="boardUpdate" parameterType="BoardVO">
+   UPDATE spring_freeboard SET
+   name=#{name},subject=#{subject},content=#{content}
+   WHERE no=#{no}
+  </update>
+  <!-- 삭제 : 트랜잭션 적용-->
+  <delete id="boardDelete" parameterType="int">
+   DELETE FROM spring_freeboard
+   WHERE no=#{no}
+  </delete>
+  <delete id="boardReplyDelete" parameterType="int">
+    DELETE FROM spring_reply
+    WHERE bno=#{bno}
+  </delete>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
