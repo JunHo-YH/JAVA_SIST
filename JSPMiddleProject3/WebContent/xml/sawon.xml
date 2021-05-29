@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sawon SYSTEM "sawon.dtd">
+<!-- 
+	XML: 지정된 태그가 1개 있다: <xml>, 나머지는 사용자 정의
+			XML을 사용할 수 있게 정의된 문서를 넘겨준다 (dtd)
+			
+		=> 정확성, 호환성이 좋다.
+		=> 무거워서 나눠서 코딩해야한다.
+		=> 태그가 어렵다.
+		=> B2B
+		=> 문법이 엄격하다.
+		================
+		1. 태그, 속성은 대소문자를 구분한다.
+			<a> != <A>
+		2.태그: 여는 태그<a>, 닫는 태그</a>, 빈태그 <input />
+			여는 태그와 닫는 태그가 명확해야한다.(계층구조)
+			속성 값은 반드시 ""를 사용한다.
+			
+			<td>
+				<input type="text" name="aaa" size="10" />
+			</td>
+			
+		3. 태그 제작시 => 알파벳이나 한글로 시작
+					   숫자가 앞에 올 수 없다.
+					   특수문자 사용: , - _ .
+		
+		4. 반드시 최상위 태그가 1개 있다.
+		<table>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+		</table>
+ -->
+ 
+ 
+ <sawon> <!-- table -->
+ 	<list no="b"> <!-- row -->
+ 		<name>홍길동</name>
+ 		<sex>남자</sex>
+ 		<dept>개발부</dept>
+ 		<age>25</age>
+ 		
+ 	</list>
+ 	<list no="c"> <!-- row -->
+ 		<name>홍길동</name>
+ 		<sex>남자</sex>
+ 		<dept>개발부</dept>
+ 		<age>25</age>
+ 		
+ 	</list>
+ 	<list no="d"> <!-- row -->
+ 		<name>홍길동</name>
+ 		<sex>남자</sex>
+ 		<dept>개발부</dept>
+ 		<age>25</age>
+ 		
+ 	</list>
+ </sawon>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

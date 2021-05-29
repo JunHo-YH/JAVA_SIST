@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans> <!-- 클래스를 등록하라는 뜻 -->
+	<bean id="list" class="com.sist.model.BoardListModel"/>
+	<bean id="insert" class="com.sist.model.BoardInsertModel"/>
+	<bean id="insert_ok" class="com.sist.model.BoardInsertOkModel"/>
+	<bean id="detail" class="com.sist.model.BoardDetailModel"/>
+	<bean id="find" class="com.sist.model.BoardFindModel"/>
+	
+</beans>

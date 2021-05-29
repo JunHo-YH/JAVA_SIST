@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	시작하는 태그: sawon
+	list+ => 한 번 이상 사용가능 (반드시 한 번은 써야한다.)
+	list* => 0번 이상 사용 => 사용하지 않거나 여러번 사용해도 된다.
+	list? => 사용 / 사용하지 않아도 된다. => 딱 한 번만 사용 or 사용하지 않기
+	list|list2 => 둘 중 한개를 사용
+	default: 반드시 한 번 사용해야한다.
+ -->
+<!ELEMENT sawon (list)+> <!-- sawon 다음 list태그가 온다고 알려주기 -->
+<!ELEMENT list (name, sex, dept, age)> <!-- 콤마(,)로 순서 설정 -->
+<!ATTLIST list no ID #REQUIRED> <!--no ID: unique, no ID #required: primary key -->
+<!ELEMENT name (#PCDATA)> <!--(#PCDATA): 문자열  -->
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT dept (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+
+
